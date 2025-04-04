@@ -1,0 +1,49 @@
+.game-login {
+  border-radius: 1rem;
+  text-transform: capitalize;
+  border-radius: 10px;
+  box-shadow: 0 0 20px #646cff;
+  border: 5px solid #646cff;
+  background-color: #292c32;
+  /* color: #646cff; */
+  font-size: 18px;
+  /* color:black */
+  color: #646cff;
+
+  max-width: 400px;
+  margin: auto;
+}
+
+.login-form {
+  margin-top: -20px;
+}
+
+.game-login .title {
+  color: #646cff;
+  /* font-size: 20px; */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.login-input {
+  text-align: left;
+}
+
+.login-input input {
+  border: 3px solid #646cff;
+  /* background-color: #03071e; */
+}
+
+@media screen and (max-width: 830px) {
+  .game-login {
+    margin: 10px 40px;
+  }
+}
+@media screen and (max-width: 420px) {
+  .game-login .card-body {
+    padding: 20px !important;
+  }
+}
+
+.game-login .glow-on-hover:after {
+  background-color: #646cff;
+}

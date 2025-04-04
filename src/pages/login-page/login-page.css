@@ -1,0 +1,77 @@
+.login-container {
+  background-image: url("../../assets/images/bg/login.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.login-container .footer-container {
+  display: flex;
+  min-height: 100px;
+  align-items: center;
+  justify-content: space-around;
+  margin-bottom: 15px;
+}
+
+a {
+  color: #6582ffb3;
+  font-weight: 500;
+  text-decoration: inherit;
+  transition: all 0.3s ease;
+}
+
+.footer-container .github-icon-container {
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 5%;
+  height: 100px;
+  padding: 5px;
+  transition: all 0.3s ease;
+  font-weight: bold;
+  font-size: 23px;
+  cursor: pointer;
+}
+.footer-container .github-icon-container span {
+  color: #003399;
+  margin-left: 10px;
+}
+
+.footer-container .github {
+  width: 100px;
+  height: 90px;
+  /* background: center / contain no-repeat
+    url(../../assets/images/icons/github.svg); */
+  transition: all 0.3s ease;
+}
+
+.footer-container .abgu {
+  width: 200px;
+  height: 100px;
+  background: center / contain no-repeat url(../../assets/images/icons/agbu.png);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #d1d1d1;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 5%;
+}
+
+.footer-container .abgu:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.footer-container .github-icon-container:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+@media screen and (max-width: 420px) {
+  .footer-container .github {
+    width: 50px;
+  }
+
+  .footer-container .abgu {
+    width: 150px;
+  }
+}
