@@ -1,34 +1,32 @@
-// import { useState } from "react";
-import { useEffect, useState } from "react";
-import Button from "../../components/button/button";
+import { useEffect, useState, useContext } from "react";
+import { PuzzleContext } from "../../contexts/appContext";
 import { useNavigate } from "react-router-dom";
+import Button from "../../components/button/button";
 import "./welcome.css";
 
-// const WelcomePage = ({ welcome: { user = "user", start } }) => {
 const WelcomePage = () => {
+  const { userName } = useContext(PuzzleContext);
   const [hideWelcome, setHideWelcome] = useState(false);
   const navigate = useNavigate();
-
-  let user = "user";
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setHideWelcome(true);
-    }, 10000); 
+    }, 10000);
 
     return () => clearTimeout(timer);
   }, []);
 
   const handleStartGame = () => {
     navigate("/puzzle-game");
-    // onSelect(select);
-    // start();
   };
+
+  console.log(userName);
 
   return (
     <div className="welcome-container">
       <h2 className={`welcome-user ${hideWelcome ? "hidden" : ""}`}>
-        Welcome, {user}!
+        Welcome, {userName}!
       </h2>
       <div className="welcome">
         <h1 className="game-title">PUZZLE GAME</h1>
