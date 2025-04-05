@@ -21,8 +21,6 @@ const WelcomePage = () => {
     navigate("/puzzle-game");
   };
 
-  console.log(userName);
-
   return (
     <div className="welcome-container">
       <h2 className={`welcome-user ${hideWelcome ? "hidden" : ""}`}>

@@ -1,0 +1,13 @@
+.puzzlesBoard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  background-color: #1b263b;
+  min-width: 90%;
+  height: 60px;
+  border-radius: 10px;
+  margin: 20px auto;
+  border: 4px solid #646cff;
+  width: 90%;
+}

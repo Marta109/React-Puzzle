@@ -4,11 +4,12 @@ import PuzzleApi from "../server/puzzleApi";
 const initialState = {
   status: "loading",
   level: 1,
-  rounds: [],
-  currentRoundIndex: 0,
-  currentWordIndex: 0,
-  currentImage: null,
+  allRounds: [],
+  currentRound: 0,
+  sentenceArr: [],
+  currentSentence: null,
   userName: "user",
+  roundsCount: 0,
   score: 0,
   time: 0,
 };
@@ -19,8 +20,12 @@ function reducer(state, action) {
     case "DATA_RECEIVED":
       return {
         ...state,
-        rounds: action.payload,
-        currentImage: action.payload[0].levelData,
+        allRounds: action.payload.rounds,
+        roundsCount: action.payload.roundsCount,
+        levelData: action.payload.rounds[0]?.levelData,
+        currentRound: 0,
+        sentenceArr: action.payload.rounds[0]?.words || [],
+        currentSentence: action.payload.rounds[0]?.words[0],
         status: "ready",
       };
     case "DATA_FAILED":
@@ -35,18 +40,21 @@ function reducer(state, action) {
         status: "active",
       };
     case "NEXT_ROUND":
-      nextIndex = state.currentRoundIndex + 1;
+      nextIndex = state.currentRound + 1;
       return {
         ...state,
-        currentRoundIndex: nextIndex,
-        currentImage: state.rounds[nextIndex]?.levelData || null,
-        currentWordIndex: 0,
+        currentRound: nextIndex,
+        levelData: state.allRounds[nextIndex]?.levelData || null,
+        sentenceArr: state.allRounds[nextIndex]?.words || [],
+        currentSentence: state.allRounds[nextIndex]?.words[0] || "",
+        // currentWordIndex: 0,
       };
-    case "NEXT_WORD":
-      return {
-        ...state,
-        currentWordIndex: state.currentWordIndex + 1,
-      };
+    // case "NEXT_WORD":
+    //   return {
+    //     ...state,
+    //     currentWordIndex: state.currentWordIndex + 1,
+    //     currentSentence: state.sentenceArr[state.currentWordIndex] || "",
+    //   };
     case "FINISH_GAME":
       return {
         ...state,
@@ -55,8 +63,10 @@ function reducer(state, action) {
     case "PLAY_AGAIN":
       return {
         ...initialState,
-        rounds: state.rounds,
-        currentImage: state.rounds[0]?.levelData,
+        allRounds: state.allRounds,
+        levelData: state.allRounds[0]?.levelData,
+        sentenceArr: state.allRounds[0]?.words || [],
+        currentSentence: state.allRounds[0]?.words[0] || "",
         status: "ready",
       };
     default:
@@ -77,7 +87,13 @@ export function PuzzleProvider({ children }) {
 
     PuzzleApi.getPuzzles(state.level).then((response) => {
       if (response.success) {
-        dispatch({ type: "DATA_RECEIVED", payload: response.data.rounds });
+        dispatch({
+          type: "DATA_RECEIVED",
+          payload: {
+            rounds: response.data.rounds, 
+            roundsCount: response.data.roundsCount, 
+          },
+        });
       } else {
         dispatch({ type: "DATA_FAILED" });
       }
