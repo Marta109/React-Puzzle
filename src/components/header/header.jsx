@@ -55,7 +55,7 @@ const Header = () => {
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link" to="/login">
+                <NavLink className="nav-link" to="/">
                   LogOut
                   <i className="fa-solid fa-right-from-bracket header-icons"></i>
                 </NavLink>

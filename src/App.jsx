@@ -15,7 +15,7 @@ function App() {
     <PuzzleProvider>
       <Routes>
         <Route
-          path="/login"
+          path="/"
           element={
             <AuthLayout>
               <LoginPage />
