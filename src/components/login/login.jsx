@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { PuzzleContext } from "../../contexts/appContext";
 import Button from "../game-button/game-button";
 import { useNavigate } from "react-router-dom";
 import "./login.css";
@@ -6,6 +7,7 @@ import "./login.css";
 const Login = () => {
   const [userName, setUserName] = useState("User");
   const [userSurName, setUserSurName] = useState("");
+  const { dispatch } = useContext(PuzzleContext);
   const navigate = useNavigate();
 
   const handleUserName = (e) => {
@@ -19,6 +21,7 @@ const Login = () => {
     e.preventDefault();
     const fullName = userName === "" ? "User" : `${userName} ${userSurName}`;
     localStorage.setItem("userName", fullName);
+    dispatch({ type: "START_GAME", payload: fullName });
     navigate("/welcome");
   };
 

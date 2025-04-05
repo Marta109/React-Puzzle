@@ -8,7 +8,7 @@ const initialState = {
   currentRoundIndex: 0,
   currentWordIndex: 0,
   currentImage: null,
-  userName: localStorage.getItem("userName") || "user",
+  userName: "user",
   score: 0,
   time: 0,
 };
@@ -70,6 +70,11 @@ export function PuzzleProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
+    const savedUserName = localStorage.getItem("userName");
+    if (savedUserName) {
+      dispatch({ type: "START_GAME", payload: savedUserName });
+    }
+
     PuzzleApi.getPuzzles(state.level).then((response) => {
       if (response.success) {
         dispatch({ type: "DATA_RECEIVED", payload: response.data.rounds });
