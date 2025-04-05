@@ -8,7 +8,7 @@
   /* color: #646cff; */
   font-size: 18px;
   /* color:black */
-  color: #646cff;
+  color: #ffc107;
 
   max-width: 400px;
   margin: auto;
@@ -19,7 +19,7 @@
 }
 
 .game-login .title {
-  color: #646cff;
+  color: #ffc107;
   /* font-size: 20px; */
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
@@ -42,8 +42,4 @@
   .game-login .card-body {
     padding: 20px !important;
   }
-}
-
-.game-login .glow-on-hover:after {
-  background-color: #646cff;
 }

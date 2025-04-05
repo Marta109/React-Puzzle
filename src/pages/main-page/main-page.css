@@ -1,0 +1,11 @@
+.main-page-container{
+    height: 100vh;
+    object-fit: fill;
+    background-image: url("https://i.pinimg.com/originals/57/9d/0c/579d0ca8d217029d524d8f84072645f5.png");
+    object-fit: fill;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 0 10px;
+    background-color: #03071E;   
+}

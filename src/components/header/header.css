@@ -1,0 +1,109 @@
+.app-header .navbar-brand {
+  color: #ffc107;
+  font-weight: bold;
+  padding: 10px;
+  background-color: #212529;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16);
+}
+
+.app-header .puzzle-icon {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+
+.app-header .navbar-brand:hover {
+  color: #e28c3b;
+}
+
+.app-header .navbar.bg-body-tertiary {
+  padding: 20px 40px;
+  background-color: #2b3035 !important ;
+}
+
+.app-header .nav-link {
+  color: #ffffff;
+}
+
+.app-header .nav-link {
+  transition: color 0.3s ease;
+}
+
+.app-header .nav-link:hover {
+  color: #e28c3b;
+}
+
+.app-header .nav-link.active {
+  color: #ffcc00;
+  font-weight: bold;
+  border-bottom: 2px solid #ffcc00;
+}
+
+.app-header .nav-link.active:hover {
+  color: #e28c3b;
+  border-bottom: 2px solid #e28c3b;
+}
+
+.app-header .btn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  background-color: #ffc107;
+  color: black;
+  border: 3px solid transparent;
+}
+
+.app-header .btn:hover {
+  color: #e28c3b;
+  background-color: black;
+  box-shadow: 0 0 5px #e28c3b;
+  border: 3px solid #e28c3b;
+}
+
+.app-header .navbar-toggler {
+  color: #212529;
+  background-color: #ffc107;
+  border: 3px solid transparent;
+}
+
+.app-header .navbar-toggler:hover {
+  box-shadow: 0 0 15px #ffc107;
+  border: 3px solid #ffc107;
+}
+
+.app-header .navbar-toggler[aria-expanded="true"] {
+  background-color: #e28c3b;
+  border: 3px solid #ffcc00;
+  box-shadow: 0 0 10px #ffcc00;
+}
+
+.app-header .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
+  filter: brightness(0) invert(1);
+}
+
+.app-header .header-icons {
+  margin-left: 5px;
+}
+.app-header .memory-icon {
+  color: #ff9800;
+  font-weight: bold;
+}
+
+@media (max-width: 800px) {
+  #navbarScroll {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out,
+      visibility 0.3s ease-in-out;
+  }
+
+  #navbarScroll.show {
+    max-height: 500px;
+    opacity: 1;
+    visibility: visible;
+  }
+}

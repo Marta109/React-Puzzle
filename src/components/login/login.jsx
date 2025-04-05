@@ -1,10 +1,12 @@
 import { useState } from "react";
 import Button from "../game-button/game-button";
+import { useNavigate } from "react-router-dom";
 import "./login.css";
 
-const Login = ({ handleLogin }) => {
+const Login = () => {
   const [userName, setUserName] = useState("User");
   const [userSurName, setUserSurName] = useState("");
+  const navigate = useNavigate();
 
   const handleUserName = (e) => {
     setUserName(e.target.value.trim());
@@ -15,11 +17,9 @@ const Login = ({ handleLogin }) => {
 
   const submit = (e) => {
     e.preventDefault();
-    if (userName === "") {
-      handleLogin("User");
-      return;
-    }
-    handleLogin(`${userName} ${userSurName}`);
+    const fullName = userName === "" ? "User" : `${userName} ${userSurName}`;
+    localStorage.setItem("userName", fullName);
+    navigate("/welcome");
   };
 
   return (
@@ -61,7 +61,7 @@ const Login = ({ handleLogin }) => {
                     onChange={handleUserSurName}
                   />
                 </div>
-                <Button name={"Login"}  />
+                <Button name={"Login"} />
               </div>
             </div>
           </div>

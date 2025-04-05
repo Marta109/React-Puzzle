@@ -1,0 +1,9 @@
+.game-board {
+  background-color: #1b263b;
+  width: 90%;
+  border-radius: 10px;
+  margin: 20px auto;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
