@@ -17,3 +17,13 @@
 .draggable {
   cursor: grab;
 }
+
+.gameBoardItemWord:hover {
+  border-color: rgb(100, 108, 255);
+  color: rgb(83, 91, 242);
+}
+
+.gameBoardItemWord:hover .shapeLeft,
+.gameBoardItemWord:hover .shapeRight {
+  border-color: rgb(100, 108, 255);
+}
