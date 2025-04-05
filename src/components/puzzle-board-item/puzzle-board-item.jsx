@@ -1,7 +1,7 @@
+import PuzzlePiece from "../puzzle-piece/puzzle-piece";
 import "./puzzle-board-item.css";
 
 const PuzzleBoardItem = ({ word, index, itemIndex, stringArrLength }) => {
-  const bothSide = itemIndex !== 0 && itemIndex !== stringArrLength;
 
   const handleClick = (e) => {
     const spans = e.currentTarget.querySelectorAll("span");
@@ -10,11 +10,10 @@ const PuzzleBoardItem = ({ word, index, itemIndex, stringArrLength }) => {
     if (emptyCell && spans.length > 0) {
       emptyCell.innerHTML = "";
 
-
       spans.forEach((span) => {
         const clone = span.cloneNode(true);
         emptyCell.appendChild(clone);
-        span.remove(); 
+        span.remove();
       });
     }
   };
@@ -26,17 +25,11 @@ const PuzzleBoardItem = ({ word, index, itemIndex, stringArrLength }) => {
       id={`puzzleItem_${index}`}
       onClick={handleClick}
     >
-      <span className="text">{word}</span>
-      <span
-        className={
-          itemIndex === 0
-            ? "shapeRight"
-            : itemIndex === stringArrLength
-            ? "shapeLeft"
-            : "shapeRight"
-        }
-      ></span>
-      {bothSide && <span className="shapeLeft"></span>}
+      <PuzzlePiece
+        word={word}
+        stringArrLength={stringArrLength}
+        itemIndex={itemIndex}
+      />
     </div>
   );
 };

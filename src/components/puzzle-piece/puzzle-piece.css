@@ -1,0 +1,29 @@
+.shapeRight,
+.shapeLeft {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #1b263b;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 1px solid black;
+}
+
+.shapeRight {
+  right: -10px;
+  clip-path: inset(0 0 0 12px);
+}
+
+.shapeLeft {
+  clip-path: inset(0 0 0 8px);
+  left: -10px;
+}
+
+
+.text {
+    text-align: center;
+    flex-grow: 1;
+    color: #ffc107;
+  }
+  
