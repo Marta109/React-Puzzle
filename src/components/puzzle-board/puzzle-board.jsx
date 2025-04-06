@@ -13,20 +13,21 @@ const PuzzleBoard = () => {
 
   const sentenceArr = currentSentence.textExample
     .split(" ")
-    .map((word, idx) => ({
-      id: `${word}-${idx}`,
+    .map((word, id) => ({
+      id: `${word}-${id}`,
       word,
     }));
 
   const mixArr = mixingArr([...sentenceArr]);
-
+  console.log(mixArr);
+  console.log(sentenceArr);
   return (
     <div className="puzzlesBoard">
       {mixArr.map((item, index) => {
         const itemIndex = sentenceArr.findIndex((el) => el.id === item.id);
         return (
           <PuzzleBoardItem
-            key={item.id}
+            key={item.id.toLowerCase() + item.word}
             word={item.word}
             index={index}
             itemIndex={itemIndex}

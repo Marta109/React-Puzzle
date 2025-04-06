@@ -5,13 +5,17 @@ import GameBoard from "../../components/game-board/game-board";
 import GameHint from "../../components/game-hint/game-hint";
 import PuzzleBoard from "../../components/puzzle-board/puzzle-board";
 import "./main-page.css";
+import PaintingInfo from "../../components/painting-info/painting-info";
 
 const MainPage = () => {
-  const { currentSentence } = useContext(PuzzleContext);
+  const { currentSentence, currentRound, sentenceArr, currentPage } =
+    useContext(PuzzleContext);
   const { dispatch } = useContext(PuzzleContext);
   const [isAutoComplete, setIsAutoComplete] = useState(true);
   const [isCheckEnabled, setIsCheckEnabled] = useState(false);
   const [nextPuzzleEnabled, setNextPuzzleEnabled] = useState(false);
+  const [showPuzzle, setShowPuzzle] = useState(false);
+  const [showPainting, setShowPainting] = useState(false);
   const gameBoardRef = useRef(null);
   const observerRef = useRef(null);
 
@@ -52,6 +56,11 @@ const MainPage = () => {
       if (observerRef.current) observerRef.current.disconnect();
     };
   }, []);
+
+  useEffect(() => {
+    const isLast = currentRound === sentenceArr.length - 1;
+    setShowPuzzle(isLast);
+  }, [currentRound, sentenceArr]);
 
   const checkPuzzle = () => {
     const correctWords = currentSentence.textExample.split(" ");
@@ -132,35 +141,67 @@ const MainPage = () => {
     dispatch({ type: "NEXT_SENTENCE" });
   };
 
+  const handleShowPuzzle = () => {
+    setShowPainting(true);
+    setNextPuzzleEnabled(false);
+  };
+
+  const handleNextRound = () => {
+    setShowPainting(false);
+    setNextPuzzleEnabled(false);
+    setIsAutoComplete(true);
+    dispatch({ type: "NEXT_ROUND" });
+  };
+
   return (
     <div className="main-page-container">
-      <GameHint />
+      {!showPainting && <GameHint />}
       <div ref={gameBoardRef}>
-        <GameBoard />
+        <GameBoard key={`game-${currentPage}`} showPainting={showPainting} />:
       </div>
-      <PuzzleBoard />
+      {!showPainting && <PuzzleBoard key={`puzzle-${currentPage}`} />}
+      {showPainting && <PaintingInfo />}
       <div className="puzzlesBoardBtns">
-        <Button
-          type="button"
-          child="Check"
-          disabled={!isCheckEnabled}
-          classes={`btn-header ${!isCheckEnabled ? "disabled" : ""}`}
-          onClick={checkPuzzle}
-        />
-        <Button
-          type="button"
-          child="Auto Complete"
-          disabled={!isAutoComplete}
-          classes={`btn-header ${!isAutoComplete ? "disabled" : ""}`}
-          onClick={handleAutoComplete}
-        />
-        <Button
-          type="button"
-          child="next puzzle"
-          disabled={!nextPuzzleEnabled}
-          classes={`btn-header ${!nextPuzzleEnabled ? "disabled" : ""}`}
-          onClick={handlerNextPuzzle}
-        />
+        {showPainting && !nextPuzzleEnabled ? (
+          <>
+            <Button
+              type="button"
+              child="results"
+              classes={`btn-header`}
+              // onClick={}
+            />
+            <Button
+              type="button"
+              child="next round"
+              classes={`btn-header`}
+              onClick={handleNextRound}
+            />
+          </>
+        ) : (
+          <>
+            <Button
+              type="button"
+              child="Check"
+              disabled={!isCheckEnabled}
+              classes={`btn-header ${!isCheckEnabled ? "disabled" : ""}`}
+              onClick={checkPuzzle}
+            />
+            <Button
+              type="button"
+              child="Auto Complete"
+              disabled={!isAutoComplete}
+              classes={`btn-header ${!isAutoComplete ? "disabled" : ""}`}
+              onClick={handleAutoComplete}
+            />
+            <Button
+              type="button"
+              child={showPuzzle ? "Show Puzzle" : "next puzzle"}
+              disabled={!nextPuzzleEnabled}
+              classes={`btn-header ${!nextPuzzleEnabled ? "disabled" : ""}`}
+              onClick={showPuzzle ? handleShowPuzzle : handlerNextPuzzle}
+            />
+          </>
+        )}
       </div>
     </div>
   );

@@ -13,7 +13,7 @@
   border-color: #646cff;
 } */
 
-.gameBoardItem.disabled .gameBoardItemWord  {
+.gameBoardItem.disabled .gameBoardItemWord {
   pointer-events: none;
   opacity: 0.7;
   margin: 0;
@@ -45,4 +45,17 @@
   font-size: large;
   font-weight: 500;
   text-shadow: 2px 2px 5px #535bf2;
+}
+
+.fadeOutOnGameBoard {
+  animation: fadeOutAnimation 1s ease forwards;
+}
+
+@keyframes fadeOutAnimation {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }

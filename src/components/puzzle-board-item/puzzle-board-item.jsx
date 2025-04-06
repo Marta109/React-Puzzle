@@ -2,7 +2,6 @@ import PuzzlePiece from "../puzzle-piece/puzzle-piece";
 import "./puzzle-board-item.css";
 
 const PuzzleBoardItem = ({ word, index, itemIndex, stringArrLength }) => {
-
   const handleClick = (e) => {
     const spans = e.currentTarget.querySelectorAll("span");
     const emptyCell = document.querySelector(".gameBoardItemWord:not(:has(*))");
@@ -17,6 +16,7 @@ const PuzzleBoardItem = ({ word, index, itemIndex, stringArrLength }) => {
       });
     }
   };
+
 
   return (
     <div

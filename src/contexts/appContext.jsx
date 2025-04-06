@@ -14,7 +14,7 @@ const initialState = {
 };
 
 function reducer(state, action) {
-  let nextIndex;
+  let nextIndex, nextPage;
   switch (action.type) {
     case "DATA_RECEIVED":
       return {
@@ -48,13 +48,15 @@ function reducer(state, action) {
         currentSentence: state.sentenceArr[nextIndex],
       };
     case "NEXT_ROUND":
-      nextIndex = state.currentRound + 1;
+      nextPage = state.currentPage + 1;
+      nextIndex = 0;
       return {
         ...state,
-        currentRound: nextIndex,
-        // levelData: state.allRounds[nextIndex]?.levelData || null,
-        sentenceArr: state.allRounds[nextIndex]?.words || [],
-        currentSentence: state.allRounds[nextIndex]?.words[0] || "",
+        currentPage: nextPage,
+        currentRound: 0,
+        levelData: state.allRounds[nextPage]?.levelData || null,
+        sentenceArr: state.allRounds[nextPage].words || [],
+        currentSentence: state.allRounds[nextPage].words[nextIndex] || "",
       };
     // case "NEXT_WORD":
     //   return {
