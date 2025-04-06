@@ -13,12 +13,12 @@ const MainPage = () => {
   const [isCheckEnabled, setIsCheckEnabled] = useState(false);
   const [nextPuzzleEnabled, setNextPuzzleEnabled] = useState(false);
   const gameBoardRef = useRef(null);
+  const observerRef = useRef(null);
 
   const resetWordStyles = () => {
     const gameBoardItems =
-      gameBoardRef.current.querySelectorAll(".gameBoardItemWord");
-
-    gameBoardItems.forEach((item) => {
+      gameBoardRef.current?.querySelectorAll(".gameBoardItemWord");
+    gameBoardItems?.forEach((item) => {
       item.classList.remove("correctWord", "inCorrectWord");
     });
   };
@@ -36,19 +36,21 @@ const MainPage = () => {
   useEffect(() => {
     checkIfAllFilled();
 
-    const observer = new MutationObserver(() => {
+    observerRef.current = new MutationObserver(() => {
       resetWordStyles();
       checkIfAllFilled();
     });
 
     if (gameBoardRef.current) {
-      observer.observe(gameBoardRef.current, {
+      observerRef.current.observe(gameBoardRef.current, {
         childList: true,
         subtree: true,
       });
     }
 
-    return () => observer.disconnect();
+    return () => {
+      if (observerRef.current) observerRef.current.disconnect();
+    };
   }, []);
 
   const checkPuzzle = () => {
@@ -79,10 +81,10 @@ const MainPage = () => {
     } else {
       setNextPuzzleEnabled(false);
     }
-
   };
 
   const handleAutoComplete = () => {
+    if (observerRef.current) observerRef.current.disconnect();
 
     const words = currentSentence.textExample.split(" ");
     const gameBoardItem = gameBoardRef.current.querySelector(
@@ -92,9 +94,10 @@ const MainPage = () => {
       ".gameBoardItem.active .gameBoardItemWord"
     );
 
-
-    gameBoardItem.classList.remove("active");
-    gameBoardItem.classList.add("disabled");
+    if (gameBoardItem) {
+      gameBoardItem.classList.remove("active");
+      gameBoardItem.classList.add("disabled");
+    }
 
     gameBoardItems.forEach((item, index) => {
       const span = document.createElement("span");
@@ -111,6 +114,15 @@ const MainPage = () => {
     setIsAutoComplete(false);
     setIsCheckEnabled(false);
     setNextPuzzleEnabled(true);
+
+    setTimeout(() => {
+      if (observerRef.current && gameBoardRef.current) {
+        observerRef.current.observe(gameBoardRef.current, {
+          childList: true,
+          subtree: true,
+        });
+      }
+    }, 0);
   };
 
   const handlerNextPuzzle = () => {
@@ -139,14 +151,14 @@ const MainPage = () => {
           type="button"
           child="Auto Complete"
           disabled={!isAutoComplete}
-          classes={`btn-header ${!isAutoComplete ? "disabled" : ""} `}
+          classes={`btn-header ${!isAutoComplete ? "disabled" : ""}`}
           onClick={handleAutoComplete}
         />
         <Button
           type="button"
           child="next puzzle"
           disabled={!nextPuzzleEnabled}
-          classes={`btn-header ${!nextPuzzleEnabled ? "disabled" : ""} `}
+          classes={`btn-header ${!nextPuzzleEnabled ? "disabled" : ""}`}
           onClick={handlerNextPuzzle}
         />
       </div>
