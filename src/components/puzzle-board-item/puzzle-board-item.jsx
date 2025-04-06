@@ -1,22 +1,21 @@
+import { useContext } from "react";
+import { PuzzleContext } from "../../contexts/appContext";
 import PuzzlePiece from "../puzzle-piece/puzzle-piece";
 import "./puzzle-board-item.css";
 
 const PuzzleBoardItem = ({ word, index, itemIndex, stringArrLength }) => {
-  const handleClick = (e) => {
-    const spans = e.currentTarget.querySelectorAll("span");
-    const emptyCell = document.querySelector(".gameBoardItemWord:not(:has(*))");
+  const { dispatch, availableWords } = useContext(PuzzleContext);
 
-    if (emptyCell && spans.length > 0) {
-      emptyCell.innerHTML = "";
+  const isWordAvailable = availableWords.includes(word);
 
-      spans.forEach((span) => {
-        const clone = span.cloneNode(true);
-        emptyCell.appendChild(clone);
-        span.remove();
+  const handleClick = () => {
+    if (isWordAvailable) {
+      dispatch({
+        type: "ADD_SELECTED_WORD",
+        payload: { word, stringArrLength, itemIndex },
       });
     }
   };
-
 
   return (
     <div
@@ -25,11 +24,15 @@ const PuzzleBoardItem = ({ word, index, itemIndex, stringArrLength }) => {
       id={`puzzleItem_${index}`}
       onClick={handleClick}
     >
-      <PuzzlePiece
-        word={word}
-        stringArrLength={stringArrLength}
-        itemIndex={itemIndex}
-      />
+      {isWordAvailable ? (
+        <PuzzlePiece
+          word={word}
+          stringArrLength={stringArrLength}
+          itemIndex={itemIndex}
+        />
+      ) : (
+        ""
+      )}
     </div>
   );
 };

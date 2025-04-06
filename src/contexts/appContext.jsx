@@ -11,12 +11,15 @@ const initialState = {
   currentSentence: null,
   userName: "user",
   roundsCount: 0,
+  selectedWords: [],
+  availableWords: [],
 };
 
 function reducer(state, action) {
   let nextIndex, nextPage;
   switch (action.type) {
-    case "DATA_RECEIVED":
+    case "DATA_RECEIVED": {
+      const firstSentence = action.payload.rounds[0]?.words[0];
       return {
         ...state,
         allRounds: action.payload.rounds,
@@ -26,7 +29,12 @@ function reducer(state, action) {
         sentenceArr: action.payload.rounds[0]?.words || [],
         currentSentence: action.payload.rounds[0]?.words[0],
         status: "ready",
+        selectedWords: new Array(
+          firstSentence.textExample.split(" ").length
+        ).fill(null),
+        availableWords: firstSentence.textExample.split(" "),
       };
+    }
     case "DATA_FAILED":
       return {
         ...state,
@@ -46,6 +54,10 @@ function reducer(state, action) {
         // levelData: state.allRounds[nextIndex]?.levelData || null,
         // sentenceArr: state.allRounds[nextIndex]?.words || [],
         currentSentence: state.sentenceArr[nextIndex],
+        selectedWords: new Array(
+          state.sentenceArr[nextIndex].textExample.split(" ").length
+        ).fill(null),
+        availableWords: action.payload.words[0].textExample.split(" "),
       };
     case "NEXT_ROUND":
       nextPage = state.currentPage + 1;
@@ -57,6 +69,9 @@ function reducer(state, action) {
         levelData: state.allRounds[nextPage]?.levelData || null,
         sentenceArr: state.allRounds[nextPage].words || [],
         currentSentence: state.allRounds[nextPage].words[nextIndex] || "",
+        selectedWords: new Array(
+          state.sentenceArr[nextIndex].textExample.split(" ").length
+        ).fill(null),
       };
     // case "NEXT_WORD":
     //   return {
@@ -64,6 +79,27 @@ function reducer(state, action) {
     //     currentWordIndex: state.currentWordIndex + 1,
     //     currentSentence: state.sentenceArr[state.currentWordIndex] || "",
     //   };
+    case "ADD_SELECTED_WORD": {
+      const { word, stringArrLength, itemIndex } = action.payload;
+
+      const wordObj = { word, stringArrLength, itemIndex };
+
+      const newSelected = [...state.selectedWords];
+      const firstEmptyIndex = newSelected.findIndex((w) => w === null);
+
+      if (firstEmptyIndex !== -1) {
+        newSelected[firstEmptyIndex] = wordObj;
+      }
+
+      const newAvailable = state.availableWords.filter((w) => w !== word);
+
+      return {
+        ...state,
+        selectedWords: newSelected,
+        availableWords: newAvailable,
+      };
+    }
+
     case "FINISH_GAME":
       return {
         ...state,

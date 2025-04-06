@@ -5,6 +5,7 @@ const GameBoardItem = ({ currentRound, word, index, showPainting }) => {
   const isShow = showPainting ? "fadeOutOnGameBoard" : "";
   const isActive = currentRound === index;
   let currentRows = currentRound >= index;
+
   return (
     <div
       className={`gameBoardItem ${isActive ? "active" : "disabled"} ${isShow}`}
