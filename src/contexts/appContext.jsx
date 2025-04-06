@@ -13,6 +13,7 @@ const initialState = {
   roundsCount: 0,
   selectedWords: [],
   availableWords: [],
+  isAutoComplete: false,
 };
 
 function reducer(state, action) {
@@ -66,6 +67,7 @@ function reducer(state, action) {
         currentSentence: nextSentence,
         selectedWords: new Array(wordsNext.length).fill(null),
         availableWords: nextAvailableWords,
+        isAutoComplete: false,
       };
     }
 
@@ -89,15 +91,10 @@ function reducer(state, action) {
         currentSentence: firstSentenceNextRound,
         selectedWords: new Array(wordsNextRound.length).fill(null),
         availableWords: availableWordsNextRound,
+        isAutoComplete: false,
       };
     }
 
-    // case "NEXT_WORD":
-    //   return {
-    //     ...state,
-    //     currentWordIndex: state.currentWordIndex + 1,
-    //     currentSentence: state.sentenceArr[state.currentWordIndex] || "",
-    //   };
     case "ADD_SELECTED_WORD": {
       const { word, stringArrLength, itemIndex } = action.payload;
 
@@ -139,15 +136,30 @@ function reducer(state, action) {
         ...state,
         status: "finished",
       };
-    case "PLAY_AGAIN":
+    case "UPDATE_SELECTED_WORDS":
       return {
-        ...initialState,
-        allRounds: state.allRounds,
-        levelData: state.allRounds[0]?.levelData,
-        sentenceArr: state.allRounds[0]?.words || [],
-        currentSentence: state.allRounds[0]?.words[0] || "",
-        status: "ready",
+        ...state,
+        selectedWords: action.payload,
       };
+    case "AUTO_COMPLETE": {
+      const correctWords = state.currentSentence.textExample.split(" ");
+
+      return {
+        ...state,
+        selectedWords: state.selectedWords.map((item, index) => {
+          const correctWord = correctWords[index];
+          return {
+            ...item,
+            word: correctWord,
+            isCorrect: true,
+            isCompleted: true,
+          };
+        }),
+        availableWords: [],
+        isCompleted: true,
+        isAutoComplete: true,
+      };
+    }
     default:
       throw new Error("Unknown action type");
   }

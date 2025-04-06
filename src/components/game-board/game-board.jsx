@@ -3,7 +3,7 @@ import { PuzzleContext } from "../../contexts/appContext";
 import GameBoardItem from "../game-board-item/game-board-item";
 import "./game-board.css";
 
-const GameBoard = ({ showPainting }) => {
+const GameBoard = ({ showPainting, isChecked }) => {
   const { sentenceArr, currentRound, levelData } = useContext(PuzzleContext);
 
   const gameBoardStyle = showPainting
@@ -27,6 +27,8 @@ const GameBoard = ({ showPainting }) => {
           word={word.textExample}
           currentRound={currentRound}
           index={index}
+          isChecked={isChecked}
+          isCompleted={word.isCompleted}
         />
       ))}
     </div>

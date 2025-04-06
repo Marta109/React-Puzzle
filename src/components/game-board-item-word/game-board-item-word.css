@@ -28,3 +28,11 @@
 .gameBoardItemWord:hover .shapeRight {
   border-color: rgb(100, 108, 255);
 }
+
+.gameBoardItemWord.disabled {
+  pointer-events: none;
+  opacity: 0.7;
+  margin: 0;
+  background-color: #616499;
+  border-radius: 5px;
+}
