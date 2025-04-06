@@ -6,10 +6,10 @@ import "./puzzle-board-item.css";
 const PuzzleBoardItem = ({ word, index, itemIndex, stringArrLength }) => {
   const { dispatch, availableWords } = useContext(PuzzleContext);
 
-  const isWordAvailable = availableWords.includes(word);
+  const wordObj = availableWords.find((el) => el.word === word);
 
   const handleClick = () => {
-    if (isWordAvailable) {
+    if (wordObj) {
       dispatch({
         type: "ADD_SELECTED_WORD",
         payload: { word, stringArrLength, itemIndex },
@@ -24,11 +24,11 @@ const PuzzleBoardItem = ({ word, index, itemIndex, stringArrLength }) => {
       id={`puzzleItem_${index}`}
       onClick={handleClick}
     >
-      {isWordAvailable ? (
+      {wordObj ? (
         <PuzzlePiece
-          word={word}
-          stringArrLength={stringArrLength}
-          itemIndex={itemIndex}
+          word={wordObj.word}
+          stringArrLength={wordObj.stringArrLength}
+          itemIndex={wordObj.itemIndex}
         />
       ) : (
         ""
