@@ -9,6 +9,21 @@
   text-align: center;
 }
 
+.hint-title {
+  color: #f2b253;
+  text-align: center;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  font-size: 30px;
+  font-weight: bold;
+  gap: 50px;
+}
+
+.painting-name {
+  font-style: italic;
+}
+
 .hint-container {
   display: flex;
   flex-direction: row;

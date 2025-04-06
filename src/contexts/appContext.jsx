@@ -6,6 +6,7 @@ const initialState = {
   level: 1,
   allRounds: [],
   currentRound: 0,
+  currentPage: 0,
   sentenceArr: [],
   currentSentence: null,
   userName: "user",

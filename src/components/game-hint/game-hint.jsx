@@ -4,7 +4,8 @@ import Button from "../button/button";
 import "./game-hint.css";
 
 const GameHint = () => {
-  const { currentSentence } = useContext(PuzzleContext);
+  const { currentSentence, level, roundsCount, currentPage, levelData } =
+    useContext(PuzzleContext);
   const [isHintVisible, setIsHintVisible] = useState(false);
   const [isPlay, setIsPlay] = useState(false);
   const audioRef = useRef(null);
@@ -33,6 +34,14 @@ const GameHint = () => {
 
   return (
     <>
+      <div className="hint-title">
+        <div className="">Level - {level}</div>
+        <div className="">
+          {" "}
+          Round - {currentPage + 1} / {roundsCount}
+        </div>
+        <div className="painting-name">Painting: -"{levelData.name}"</div>
+      </div>
       <div className="hint-container">
         <div className="showHint">
           <div className="hint-items" onClick={toggleHintVisibility}>
