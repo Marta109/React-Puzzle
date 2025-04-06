@@ -12,6 +12,7 @@
   font-size: large;
   font-weight: 500;
   text-shadow: 2px 2px 5px #535bf2;
+  margin: 5px;
 }
 
 .draggable {

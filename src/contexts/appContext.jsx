@@ -10,8 +10,6 @@ const initialState = {
   currentSentence: null,
   userName: "user",
   roundsCount: 0,
-  score: 0,
-  time: 0,
 };
 
 function reducer(state, action) {
@@ -39,15 +37,23 @@ function reducer(state, action) {
         userName: action.payload,
         status: "active",
       };
+    case "NEXT_SENTENCE":
+      nextIndex = state.currentRound + 1;
+      return {
+        ...state,
+        currentRound: nextIndex,
+        // levelData: state.allRounds[nextIndex]?.levelData || null,
+        // sentenceArr: state.allRounds[nextIndex]?.words || [],
+        currentSentence: state.sentenceArr[nextIndex],
+      };
     case "NEXT_ROUND":
       nextIndex = state.currentRound + 1;
       return {
         ...state,
         currentRound: nextIndex,
-        levelData: state.allRounds[nextIndex]?.levelData || null,
+        // levelData: state.allRounds[nextIndex]?.levelData || null,
         sentenceArr: state.allRounds[nextIndex]?.words || [],
         currentSentence: state.allRounds[nextIndex]?.words[0] || "",
-        // currentWordIndex: 0,
       };
     // case "NEXT_WORD":
     //   return {
@@ -90,8 +96,8 @@ export function PuzzleProvider({ children }) {
         dispatch({
           type: "DATA_RECEIVED",
           payload: {
-            rounds: response.data.rounds, 
-            roundsCount: response.data.roundsCount, 
+            rounds: response.data.rounds,
+            roundsCount: response.data.roundsCount,
           },
         });
       } else {

@@ -13,7 +13,7 @@ const GameBoard = () => {
           key={index}
           word={word.textExample}
           currentRound={currentRound}
-          showNum={currentRound === index}
+          index={index}
         />
       ))}
     </div>

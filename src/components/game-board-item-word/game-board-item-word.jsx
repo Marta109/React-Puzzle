@@ -1,9 +1,10 @@
 import "./game-board-item-word.css";
 
-const GameBoardItemWord = ({ word }) => {
+const GameBoardItemWord = ({ word, isActive }) => {
   const wordArr = word.split(" ");
 
   const handleClick = (e) => {
+    if (!isActive) return;
     const spans = e.currentTarget.querySelectorAll("span");
     const emptyPuzzleItem = document.querySelector(
       ".puzzleItem:not(:has(span))"
@@ -20,13 +21,18 @@ const GameBoardItemWord = ({ word }) => {
 
   return (
     <>
-      {wordArr.map((word, index) => (
-        <div
-          key={index}
-          className="gameBoardItemWord draggable"
-          onClick={handleClick}
-        ></div>
-      ))}
+      {wordArr.map(
+        (word, index) => (
+          (
+            <div
+              key={index}
+              className="gameBoardItemWord draggable"
+              onClick={isActive ? handleClick : undefined}
+              draggable={isActive}
+            ></div>
+          )
+        )
+      )}
     </>
   );
 };

@@ -11,13 +11,13 @@
 }
 
 .shapeRight {
-  right: -10px;
-  clip-path: inset(0 0 0 12px);
+  clip-path: inset(0 0 0 8px);
+  right: -11.8px;
 }
 
 .shapeLeft {
   clip-path: inset(0 0 0 8px);
-  left: -10px;
+  left: -9.5px;
 }
 
 

@@ -1,15 +1,13 @@
 import GameBoardItemWord from "../game-board-item-word/game-board-item-word";
 import "./game-board-item.css";
 
-const GameBoardItem = ({ currentRound, showNum, word }) => {
+const GameBoardItem = ({ currentRound, word, index }) => {
+  const isActive = currentRound === index;
+  let currentRows = currentRound >= index;
   return (
-    <div className="gameBoardItem">
-      {showNum ? (
-        <div className="gameBoardItemNum">{currentRound + 1}</div>
-      ) : (
-        ""
-      )}
-      {showNum ? <GameBoardItemWord word={word} /> : ""}
+    <div className={`gameBoardItem ${isActive ? "active" : "disabled"}`}>
+      {currentRows && <div className="gameBoardItemNum">{index + 1}</div>}
+      {currentRows && <GameBoardItemWord word={word} isActive={isActive} />}
     </div>
   );
 };

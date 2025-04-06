@@ -21,3 +21,38 @@
   margin: 10px;
   flex-wrap: wrap;
 }
+
+.inCorrectWord {
+  z-index: 3;
+  border-width: 3px;
+  border-style: groove;
+  border-color: rgb(157, 2, 8);
+  border-image: initial;
+  border-radius: 5px;
+}
+.inCorrectWord span:not(.text) {
+  border-color: rgb(157, 2, 8);
+  border-width: 3px;
+}
+
+.correctWord {
+  z-index: 3;
+  border-style: groove;
+  border-color: rgb(31, 173, 38);
+  border-image: initial;
+  border-radius: 5px;
+  border-width: 3px;
+}
+.correctWord span:not(.text) {
+  border-width: 3px;
+  border-color: rgb(31, 173, 38);
+}
+
+.noHover {
+  pointer-events: none;
+}
+
+.btnDisabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

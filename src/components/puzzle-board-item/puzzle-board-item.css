@@ -21,6 +21,7 @@
 .puzzleItem:hover .shapeLeft,
 .puzzleItem:hover .shapeRight {
   border-color: rgb(100, 108, 255);
+  overflow: hidden;
 }
 
 .draggable {
