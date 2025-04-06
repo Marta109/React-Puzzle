@@ -1,7 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import LoginPage from "./pages/login-page/login-page";
 import WelcomePage from "./pages/welcome-page/welcome-page";
-// import GameBoard from "./pages/game-board/game-board";
 // import NotFound from "./components/not-found/not-found";
 import AuthLayout from "./layouts/AuthLayout";
 import MainLayout from "./layouts/MainLayout";

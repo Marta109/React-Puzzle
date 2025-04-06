@@ -2,7 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import { PuzzleContext } from "../../contexts/appContext";
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/button/button";
-import "./welcome.css";
+import "./welcome-page.css";
 
 const WelcomePage = () => {
   const { userName } = useContext(PuzzleContext);

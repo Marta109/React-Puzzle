@@ -1,0 +1,65 @@
+.hint {
+  color: #f2b253;
+  font-size: large;
+  font-weight: bold;
+  background-color: #1b263b;
+  transform: scale(0.94);
+  animation: scale 3s forwards cubic-bezier(0.5, 1, 0.89, 1);
+  transition: opacity 0.5s ease-out;
+  text-align: center;
+}
+
+.hint-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  margin: 20px;
+}
+
+.showHint .hint-items {
+  cursor: pointer;
+  width: 100px;
+}
+
+@keyframes scale {
+  100% {
+    transform: scale(1);
+  }
+}
+
+.showHint {
+  position: relative;
+}
+
+.showHint span {
+  position: relative;
+  display: inline-block;
+  font-size: 40px;
+  color: #535bf2;
+  text-transform: uppercase;
+  animation: flip 2s infinite;
+  animation-delay: calc(0.2s * var(--i));
+}
+
+@keyframes flip {
+  0%,
+  80% {
+    transform: rotateY(360deg);
+  }
+}
+
+.fadeOutOnGameBoard {
+  animation: fadeOutAnimation 1s ease forwards;
+}
+
+@keyframes fadeOutAnimation {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}

@@ -1,11 +1,9 @@
-import { useState, useContext, useEffect } from "react";
-import { NavLink, useNavigate, useSearchParams } from "react-router";
+import { useState } from "react";
+import { NavLink } from "react-router";
 import puzzleIcon from "../../assets/images/icons/puzzle.svg";
-// import { AppContext } from "../../contexts/appContext";
 import "./header.css";
 
 const Header = () => {
-  // const { searchHandler } = useContext(AppContext);
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
