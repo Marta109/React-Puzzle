@@ -22,6 +22,12 @@ function reducer(state, action) {
     case "DATA_RECEIVED": {
       const firstSentence = action.payload.rounds[0]?.words[0];
       const wordsArr = firstSentence.textExample.split(" ");
+      const allSelectedWords = action.payload.rounds.map((round) =>
+        round.words.map((sentence) => {
+          const length = sentence.textExample.split(" ").length;
+          return new Array(length).fill(null);
+        })
+      );
       const availableWords = wordsArr.map((word, idx) => ({
         word,
         stringArrLength: wordsArr.length - 1,
@@ -36,7 +42,7 @@ function reducer(state, action) {
         sentenceArr: action.payload.rounds[0]?.words || [],
         currentSentence: firstSentence,
         status: "ready",
-        selectedWords: new Array(wordsArr.length).fill(null),
+        selectedWords: allSelectedWords,
         availableWords,
       };
     }
@@ -65,7 +71,7 @@ function reducer(state, action) {
         ...state,
         currentRound: nextIndex,
         currentSentence: nextSentence,
-        selectedWords: new Array(wordsNext.length).fill(null),
+        // selectedWords: new Array(wordsNext.length).fill(null),
         availableWords: nextAvailableWords,
         isAutoComplete: false,
       };
@@ -89,44 +95,48 @@ function reducer(state, action) {
         levelData: state.allRounds[nextPage]?.levelData || null,
         sentenceArr: state.allRounds[nextPage].words || [],
         currentSentence: firstSentenceNextRound,
-        selectedWords: new Array(wordsNextRound.length).fill(null),
+        selectedWords: state.selectedWords,
         availableWords: availableWordsNextRound,
         isAutoComplete: false,
       };
     }
 
     case "ADD_SELECTED_WORD": {
-      const { word, stringArrLength, itemIndex } = action.payload;
-
+      const { word, stringArrLength, itemIndex, roundIndex, sentenceIndex } =
+        action.payload;
       const wordObj = { word, stringArrLength, itemIndex };
 
-      const newSelected = [...state.selectedWords];
-      const firstEmptyIndex = newSelected.findIndex((w) => w === null);
+      const newSelectedWords = [...state.selectedWords];
+      const newRow = [...newSelectedWords[roundIndex][sentenceIndex]];
+      const firstEmpty = newRow.findIndex((w) => w === null);
 
-      if (firstEmptyIndex !== -1) {
-        newSelected[firstEmptyIndex] = wordObj;
-      }
+      if (firstEmpty !== -1) newRow[firstEmpty] = wordObj;
 
-      const newAvailable = state.availableWords.filter((w) => w.word !== word);
+      newSelectedWords[roundIndex][sentenceIndex] = newRow;
 
       return {
         ...state,
-        selectedWords: newSelected,
-        availableWords: newAvailable,
+        selectedWords: newSelectedWords,
+        availableWords: state.availableWords.filter((w) => w.word !== word),
       };
     }
 
     case "REMOVE_SELECTED_WORD": {
-      const { indexToRemove } = action.payload;
-      const wordObj = state.selectedWords[indexToRemove];
+      const { roundIndex, sentenceIndex, indexToRemove } = action.payload;
+
+      const selectedRow = state.selectedWords[roundIndex][sentenceIndex];
+      const wordObj = selectedRow[indexToRemove];
+
       if (!wordObj) return state;
 
-      const newSelected = [...state.selectedWords];
-      newSelected[indexToRemove] = null;
+      const newSelectedWords = [...state.selectedWords];
+      const newRow = [...newSelectedWords[roundIndex][sentenceIndex]];
+      newRow[indexToRemove] = null;
+      newSelectedWords[roundIndex][sentenceIndex] = newRow;
 
       return {
         ...state,
-        selectedWords: newSelected,
+        selectedWords: newSelectedWords,
         availableWords: [...state.availableWords, wordObj],
       };
     }
@@ -142,19 +152,22 @@ function reducer(state, action) {
         selectedWords: action.payload,
       };
     case "AUTO_COMPLETE": {
+      const roundIndex = state.currentPage;
+      const sentenceIndex = state.currentRound;
+
       const correctWords = state.currentSentence.textExample.split(" ");
+      const newSelectedWords = [...state.selectedWords];
+      const newRow = correctWords.map((word) => ({
+        word,
+        isCorrect: true,
+        isCompleted: true,
+      }));
+
+      newSelectedWords[roundIndex][sentenceIndex] = newRow;
 
       return {
         ...state,
-        selectedWords: state.selectedWords.map((item, index) => {
-          const correctWord = correctWords[index];
-          return {
-            ...item,
-            word: correctWord,
-            isCorrect: true,
-            isCompleted: true,
-          };
-        }),
+        selectedWords: newSelectedWords,
         availableWords: [],
         isCompleted: true,
         isAutoComplete: true,

@@ -9,6 +9,8 @@ const GameBoardItem = ({
   index,
   showPainting,
   isChecked,
+  roundIndex,
+  sentenceIndex,
 }) => {
   const { isAutoComplete } = useContext(PuzzleContext);
 
@@ -28,6 +30,8 @@ const GameBoardItem = ({
           word={word}
           isActive={isActive}
           isChecked={isChecked}
+          roundIndex={roundIndex}
+          sentenceIndex={sentenceIndex}
         />
       )}
     </div>

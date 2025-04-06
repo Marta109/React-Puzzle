@@ -3,40 +3,46 @@ import { PuzzleContext } from "../../contexts/appContext";
 import PuzzlePiece from "../puzzle-piece/puzzle-piece";
 import "./game-board-item-word.css";
 
-const GameBoardItemWord = ({ isActive, isChecked }) => {
+const GameBoardItemWord = ({
+  isActive,
+  isChecked,
+  roundIndex,
+  sentenceIndex,
+}) => {
   const { selectedWords, isCompleted, isAutoComplete, dispatch } =
     useContext(PuzzleContext);
 
-  if (!isActive) return;
+  const sentenceWords = selectedWords?.[roundIndex]?.[sentenceIndex] || [];
 
   const handleRemove = (index) => {
     dispatch({
       type: "REMOVE_SELECTED_WORD",
-      payload: { indexToRemove: index },
+      payload: {
+        roundIndex,
+        sentenceIndex,
+        indexToRemove: index,
+      },
     });
   };
 
   return (
     <>
-      {selectedWords.map((item, index) => {
+      {sentenceWords.map((item, index) => {
         let checkClass =
           isChecked && item?.isCorrect
             ? "correctWord"
             : item?.isCorrect === false
             ? "inCorrectWord"
             : "";
+
         if (isAutoComplete) {
           checkClass = "";
         }
-        // const checkClass = isChecked
-        //   ? item?.isCorrect
-        //     ? "correctWord"
-        //     : "inCorrectWord"
-        //   : "";
+
         return (
           <div
             key={index}
-            className={`gameBoardItemWord  draggable ${checkClass} `}
+            className={`gameBoardItemWord draggable ${checkClass}`}
             draggable={isActive && !isCompleted}
             onClick={
               isActive && !isCompleted ? () => handleRemove(index) : undefined
