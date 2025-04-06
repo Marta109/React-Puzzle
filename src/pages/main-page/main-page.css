@@ -11,17 +11,6 @@
   overflow: hidden;
 }
 
-.main-page-container .puzzlesBoardBtns {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-  text-align: center;
-  margin: 10px;
-  flex-wrap: wrap;
-}
-
 .inCorrectWord {
   z-index: 3;
   border-width: 3px;

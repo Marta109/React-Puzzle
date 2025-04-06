@@ -19,8 +19,7 @@ const PuzzleBoard = () => {
     }));
 
   const mixArr = mixingArr([...sentenceArr]);
-  console.log(mixArr);
-  console.log(sentenceArr);
+
   return (
     <div className="puzzlesBoard">
       {mixArr.map((item, index) => {

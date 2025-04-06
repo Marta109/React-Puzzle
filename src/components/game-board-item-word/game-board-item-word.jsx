@@ -19,13 +19,15 @@ const GameBoardItemWord = ({ isActive, isChecked }) => {
   return (
     <>
       {selectedWords.map((item, index) => {
-        const checkClass =
+        let checkClass =
           isChecked && item?.isCorrect
             ? "correctWord"
             : item?.isCorrect === false
             ? "inCorrectWord"
             : "";
-
+        if (isAutoComplete) {
+          checkClass = "";
+        }
         // const checkClass = isChecked
         //   ? item?.isCorrect
         //     ? "correctWord"
