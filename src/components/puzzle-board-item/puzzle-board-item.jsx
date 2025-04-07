@@ -15,7 +15,7 @@ const PuzzleBoardItem = ({ word, index, itemIndex, stringArrLength }) => {
         payload: {
           word,
           stringArrLength,
-          itemIndex: itemIndex + "-" + wordObj.word,
+          itemIndex: itemIndex,
         },
       });
     }
