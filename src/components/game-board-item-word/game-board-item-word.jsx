@@ -8,13 +8,12 @@ const GameBoardItemWord = ({
   isChecked,
   roundIndex,
   sentenceIndex,
+  word,
+  index,
 }) => {
-  const { selectedWords, isCompleted, isAutoComplete, dispatch } =
-    useContext(PuzzleContext);
+  const { isCompleted, isAutoComplete, dispatch } = useContext(PuzzleContext);
 
-  const sentenceWords = selectedWords?.[roundIndex]?.[sentenceIndex] || [];
-
-  const handleRemove = (index) => {
+  const handleRemove = () => {
     dispatch({
       type: "REMOVE_SELECTED_WORD",
       payload: {
@@ -25,46 +24,35 @@ const GameBoardItemWord = ({
     });
   };
 
+  let checkedClass = isChecked
+    ? isChecked && word?.isCorrect
+      ? "correctWord"
+      : "inCorrectWord"
+    : "";
+  if (word === null) {
+    checkedClass = "";
+  }
+
   return (
-    <>
-      {sentenceWords.map((item, index) => {
-        let checkClass =
-          isChecked && item?.isCorrect
-            ? "correctWord"
-            : item?.isCorrect === false
-            ? "inCorrectWord"
-            : "";
-
-        if (isAutoComplete) {
-          checkClass = "";
-        }
-
-        return (
-          <div
-            key={index}
-            className={`gameBoardItemWord draggable ${checkClass}`}
-            draggable={isActive && !isCompleted}
-            onClick={
-              isActive && !isCompleted ? () => handleRemove(index) : undefined
-            }
-          >
-            {item ? (
-              isAutoComplete ? (
-                <div className="">{item.word}</div>
-              ) : (
-                <PuzzlePiece
-                  word={item.word}
-                  stringArrLength={item.stringArrLength}
-                  itemIndex={item.itemIndex}
-                />
-              )
-            ) : (
-              ""
-            )}
-          </div>
-        );
-      })}
-    </>
+    <div
+      className={`gameBoardItemWord draggable ${checkedClass}`}
+      draggable={isActive && !isCompleted}
+      onClick={isActive && !isCompleted ? () => handleRemove() : undefined}
+    >
+      {word ? (
+        isAutoComplete ? (
+          <div>{word.word}</div>
+        ) : (
+          <PuzzlePiece
+            word={word.word}
+            stringArrLength={word.stringArrLength}
+            itemIndex={word.itemIndex}
+          />
+        )
+      ) : (
+        ""
+      )}
+    </div>
   );
 };
 

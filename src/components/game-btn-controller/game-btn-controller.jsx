@@ -10,6 +10,7 @@ const GameBtnController = ({ setShowPainting, setIsChecked, showPainting }) => {
     availableWords,
     isAutoComplete,
     currentRound,
+    currentPage,
     sentenceArr,
     dispatch,
   } = useContext(PuzzleContext);
@@ -18,8 +19,6 @@ const GameBtnController = ({ setShowPainting, setIsChecked, showPainting }) => {
   const [isCheckEnabled, setIsCheckEnabled] = useState(false);
   const [nextPuzzleEnabled, setNextPuzzleEnabled] = useState(false);
   const [showPuzzle, setShowPuzzle] = useState(false);
-  //   const [showPainting, setShowPainting] = useState(false);
-  //   const [isChecked, setIsChecked] = useState(false);
 
   useEffect(() => {
     setIsCheckEnabled(availableWords.length === 0 && !isAutoComplete);
@@ -34,9 +33,10 @@ const GameBtnController = ({ setShowPainting, setIsChecked, showPainting }) => {
     const correctWords = currentSentence.textExample.split(" ");
     let isCorrect = true;
 
-    const updatedSelectedWords = selectedWords.map((item, index) => {
-      const wordInGameBoard = item?.word;
+    const updatedRoundWords = selectedWords[currentPage].map((item, index) => {
+      if (!item) return null;
 
+      const wordInGameBoard = item.word;
       if (wordInGameBoard !== correctWords[index]) {
         isCorrect = false;
         return { ...item, isCorrect: false };
@@ -44,6 +44,9 @@ const GameBtnController = ({ setShowPainting, setIsChecked, showPainting }) => {
         return { ...item, isCorrect: true };
       }
     });
+
+    const updatedSelectedWords = [...selectedWords];
+    updatedSelectedWords[currentPage] = updatedRoundWords;
 
     dispatch({
       type: "UPDATE_SELECTED_WORDS",

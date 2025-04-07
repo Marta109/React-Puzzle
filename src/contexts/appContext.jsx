@@ -22,30 +22,33 @@ function reducer(state, action) {
     case "DATA_RECEIVED": {
       const firstSentence = action.payload.rounds[0]?.words[0];
       const wordsArr = firstSentence.textExample.split(" ");
-      const allSelectedWords = action.payload.rounds.map((round) =>
-        round.words.map((sentence) => {
-          const length = sentence.textExample.split(" ").length;
-          return new Array(length).fill(null);
-        })
-      );
+      const currentRoundWords = action.payload.rounds[0]?.words || [];
+
+      const allSelectedWords = currentRoundWords.map((sentence) => {
+        const length = sentence.textExample.split(" ").length;
+        return new Array(length).fill(null);
+      });
+
       const availableWords = wordsArr.map((word, idx) => ({
         word,
         stringArrLength: wordsArr.length - 1,
         itemIndex: idx,
       }));
+
       return {
         ...state,
         allRounds: action.payload.rounds,
         roundsCount: action.payload.roundsCount,
         levelData: action.payload.rounds[0]?.levelData,
         currentRound: 0,
-        sentenceArr: action.payload.rounds[0]?.words || [],
+        sentenceArr: currentRoundWords,
         currentSentence: firstSentence,
         status: "ready",
         selectedWords: allSelectedWords,
         availableWords,
       };
     }
+
     case "DATA_FAILED":
       return {
         ...state,
@@ -67,11 +70,17 @@ function reducer(state, action) {
         itemIndex: idx,
       }));
 
+      const updatedSelectedWords = [...state.selectedWords];
+
+      updatedSelectedWords[state.currentPage + 1] = new Array(
+        wordsNext.length
+      ).fill(null);
+
       return {
         ...state,
         currentRound: nextIndex,
         currentSentence: nextSentence,
-        // selectedWords: new Array(wordsNext.length).fill(null),
+        selectedWords: updatedSelectedWords,
         availableWords: nextAvailableWords,
         isAutoComplete: false,
       };
@@ -102,17 +111,24 @@ function reducer(state, action) {
     }
 
     case "ADD_SELECTED_WORD": {
-      const { word, stringArrLength, itemIndex, roundIndex, sentenceIndex } =
-        action.payload;
+      const { word, stringArrLength, itemIndex } = action.payload;
       const wordObj = { word, stringArrLength, itemIndex };
 
+      const { currentPage } = state;
+
+      const currentRow = [...(state.selectedWords[currentPage] || [])];
+
+      while (currentRow.length < stringArrLength) {
+        currentRow.push(null);
+      }
+
+      const firstEmpty = currentRow.findIndex((w) => w === null);
+      if (firstEmpty !== -1) {
+        currentRow[firstEmpty] = wordObj;
+      }
+
       const newSelectedWords = [...state.selectedWords];
-      const newRow = [...newSelectedWords[roundIndex][sentenceIndex]];
-      const firstEmpty = newRow.findIndex((w) => w === null);
-
-      if (firstEmpty !== -1) newRow[firstEmpty] = wordObj;
-
-      newSelectedWords[roundIndex][sentenceIndex] = newRow;
+      newSelectedWords[currentPage] = currentRow;
 
       return {
         ...state,
@@ -122,17 +138,18 @@ function reducer(state, action) {
     }
 
     case "REMOVE_SELECTED_WORD": {
-      const { roundIndex, sentenceIndex, indexToRemove } = action.payload;
+      const { roundIndex, indexToRemove } = action.payload;
 
-      const selectedRow = state.selectedWords[roundIndex][sentenceIndex];
-      const wordObj = selectedRow[indexToRemove];
+      const selectedRow = state.selectedWords[roundIndex];
+      const wordObj = selectedRow?.[indexToRemove];
 
       if (!wordObj) return state;
 
       const newSelectedWords = [...state.selectedWords];
-      const newRow = [...newSelectedWords[roundIndex][sentenceIndex]];
+      const newRow = [...newSelectedWords[roundIndex]];
+
       newRow[indexToRemove] = null;
-      newSelectedWords[roundIndex][sentenceIndex] = newRow;
+      newSelectedWords[roundIndex] = newRow;
 
       return {
         ...state,
@@ -146,11 +163,20 @@ function reducer(state, action) {
         ...state,
         status: "finished",
       };
-    case "UPDATE_SELECTED_WORDS":
+    case "UPDATE_SELECTED_WORDS": {
+      const updatedSelectedWords = action.payload;
+
+      if (!updatedSelectedWords || typeof updatedSelectedWords !== "object") {
+        console.error("Invalid structure for updatedSelectedWords");
+        return state;
+      }
+
       return {
         ...state,
-        selectedWords: action.payload,
+        selectedWords: updatedSelectedWords,
       };
+    }
+
     case "AUTO_COMPLETE": {
       const roundIndex = state.currentPage;
       const sentenceIndex = state.currentRound;

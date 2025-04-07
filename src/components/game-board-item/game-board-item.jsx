@@ -5,35 +5,43 @@ import "./game-board-item.css";
 
 const GameBoardItem = ({
   currentRound,
-  word,
   index,
   showPainting,
   isChecked,
   roundIndex,
   sentenceIndex,
 }) => {
-  const { isAutoComplete } = useContext(PuzzleContext);
+  const { isAutoComplete, selectedWords } = useContext(PuzzleContext);
 
   const isShow = showPainting ? "fadeOutOnGameBoard" : "";
   const isActive = currentRound === index;
   let currentRows = currentRound >= index;
 
+  const sentenceWords = selectedWords?.[roundIndex] || [];
+
+  if (!sentenceWords) return;
+
+  // console.log(sentenceWords);
   return (
     <div
       className={`gameBoardItem ${
         !isAutoComplete ? "active" : "disabled"
-      }  ${isShow} `}
+      }  ${isShow} ${isActive ? "" : "disabled"} `}
     >
       {currentRows && <div className="gameBoardItemNum">{index + 1}</div>}
-      {currentRows && (
-        <GameBoardItemWord
-          word={word}
-          isActive={isActive}
-          isChecked={isChecked}
-          roundIndex={roundIndex}
-          sentenceIndex={sentenceIndex}
-        />
-      )}
+      {currentRows &&
+        sentenceWords.map((word, idx) => (
+          <GameBoardItemWord
+            key={idx}
+            word={word}
+            isActive={isActive}
+            isChecked={isChecked}
+            roundIndex={roundIndex}
+            sentenceIndex={sentenceIndex}
+            stringArrLength={sentenceWords.length}
+            index={idx}
+          />
+        ))}
     </div>
   );
 };
