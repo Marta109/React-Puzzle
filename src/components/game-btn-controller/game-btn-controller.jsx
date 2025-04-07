@@ -3,7 +3,12 @@ import { PuzzleContext } from "../../contexts/appContext";
 import Button from "../button/button";
 import "./game-btn-controller.css";
 
-const GameBtnController = ({ setShowPainting, setIsChecked, showPainting }) => {
+const GameBtnController = ({
+  setShowPainting,
+  setIsChecked,
+  showPainting,
+  setShowModal,
+}) => {
   const {
     currentSentence,
     selectedWords,
@@ -98,7 +103,7 @@ const GameBtnController = ({ setShowPainting, setIsChecked, showPainting }) => {
             type="button"
             child="results"
             classes="btn-header"
-            // onClick={}
+            onClick={() => setShowModal(true)}
           />
           <Button
             type="button"

@@ -1,0 +1,167 @@
+.app-modal .modal {
+  overflow: hidden;
+}
+
+.app-modal .modal-content {
+  min-height: 200px;
+  background-color: #242b34;
+  text-align: left;
+  border-radius: 10px;
+  box-shadow: 0 0 15px #646cff;
+  border: 2px solid #646cff;
+  width: 700px;
+}
+
+.app-modal .modal-title {
+  font-weight: bold;
+  text-align: center;
+  color: #ffc107;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.app-modal .btn-close {
+  font-size: 1.2rem;
+  background-color: #ffc107;
+}
+
+.modal-btn {
+  height: auto;
+  width: auto;
+  /* padding: 10px; */
+  font-size: 18px;
+}
+
+.modal-btn.watch i {
+  color: #ed5a00;
+}
+
+.modal {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.modal-dialog {
+  max-width: 90%;
+  width: 700px;
+  margin: auto;
+}
+
+@media (max-width: 750px) {
+  .app-modal .modal-content {
+    width: 100%;
+  }
+  .app-modal .modal-title {
+    font-size: 1.2rem !important;
+  }
+}
+
+@media (max-width: 648px) {
+  .app-modal .modal-title {
+    font-size: 1rem !important;
+  }
+  .movie-details-container,
+  .card-body,
+  p {
+    font-size: 0.8rem !important;
+  }
+
+  .movie-details-container .img-fluid {
+    width: 250px !important;
+    height: 250px !important;
+  }
+}
+
+@media (max-width: 550px) {
+  .app-modal .imdb-rating {
+    gap: 5px !important;
+  }
+
+  .app-modal .imdb-item img,
+  .rating-item img {
+    width: 30px !important;
+    height: 30px !important;
+  }
+  .app-modal .imdb-item .votes {
+    font-size: 1rem !important;
+  }
+
+  .app-modal .more-info button {
+    display: block;
+    width: 180px;
+    font-size: 1rem;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 490px) {
+  .app-modal .movie-details-container {
+    flex-direction: column;
+  }
+
+  .movie-details-container .img-fluid {
+    width: 100% !important;
+    height: 400px !important;
+    object-fit: fill;
+  }
+
+  .app-modal .imdb-rating {
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+}
+
+.movie-details-container {
+  display: flex;
+  flex-direction: row;
+  font-size: 1rem;
+  justify-content: center;
+  gap: 10px;
+}
+
+.movie-details-container .img-fluid {
+  height: 300px;
+  object-fit: cover;
+  /* width: 200px; */
+  border-radius: 10px;
+}
+
+.painting-info {
+  width: 50%;
+  color: #f2b253;
+}
+
+.app-modal .card {
+  background-color: rgb(44, 48, 52);
+  color: rgb(255, 255, 255);
+  margin-top: 5px;
+}
+
+.card-body {
+  flex: 1 1 auto;
+  padding: var(--bs-card-spacer-y) var(--bs-card-spacer-x);
+  color: var(--bs-card-color);
+}
+
+.painting-name.open {
+  margin-top: 10px;
+  color: #646cff;
+}
+
+.painting-name.open:hover {
+  color: #ed5a00;
+}
+
+.level-info {
+  font-size: 18px;
+  background-color: rgb(44, 48, 52);
+  border-radius: 10px;
+  padding: 5px;
+  margin-bottom: 15px;
+  color: aliceblue ;
+}

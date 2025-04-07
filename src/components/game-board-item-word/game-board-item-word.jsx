@@ -14,6 +14,9 @@ const GameBoardItemWord = ({
   const { isCompleted, isAutoComplete, dispatch } = useContext(PuzzleContext);
 
   const handleRemove = () => {
+    if (!word) return;
+    console.log("try");
+    console.log(word);
     dispatch({
       type: "REMOVE_SELECTED_WORD",
       payload: {
@@ -34,14 +37,15 @@ const GameBoardItemWord = ({
     checkedClass = "";
   }
 
+  // let showBorder={!word.autocompleted?"greenBorder":"" }
   return (
     <div
-      className={`gameBoardItemWord draggable ${checkedClass}`}
+      className={`gameBoardItemWord draggable ${checkedClass} `}
       draggable={isActive && !isCompleted}
-      onClick={isActive && !isCompleted ? () => handleRemove() : undefined}
+      onClick={handleRemove}
     >
       {word ? (
-        isAutoComplete ? (
+        isAutoComplete || word.autocompleted ? (
           <div>{word.word}</div>
         ) : (
           <PuzzlePiece

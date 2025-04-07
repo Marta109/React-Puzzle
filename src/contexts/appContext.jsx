@@ -190,6 +190,7 @@ function reducer(state, action) {
         isCorrect: true,
         isCompleted: true,
         stringArrLength: correctWords.length,
+        autocompleted: true,
         itemIndex: index,
       }));
 

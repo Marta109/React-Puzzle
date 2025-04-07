@@ -7,28 +7,32 @@ import PuzzleBoard from "../../components/puzzle-board/puzzle-board";
 import "./main-page.css";
 import PaintingInfo from "../../components/painting-info/painting-info";
 import GameBtnController from "../../components/game-btn-controller/game-btn-controller";
+import Modal from "../../components/modal/modal";
 
 const MainPage = () => {
   const { currentPage } = useContext(PuzzleContext);
   const [showPainting, setShowPainting] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   return (
     <div className="main-page-container">
       {!showPainting && <GameHint />}
+      {showModal && <Modal setShowModal={setShowModal} />}
       <GameBoard
         key={`game-${currentPage}`}
         showPainting={showPainting}
         isChecked={isChecked}
         setIsChecked={setIsChecked}
       />
-      {!showPainting && <PuzzleBoard key={`puzzle-${currentPage}`} />}
       {showPainting && <PaintingInfo />}
+      {!showPainting && <PuzzleBoard key={`puzzle-${currentPage}`} />}
 
       <GameBtnController
         setShowPainting={setShowPainting}
         setIsChecked={setIsChecked}
         showPainting={showPainting}
+        setShowModal={setShowModal}
       />
     </div>
   );

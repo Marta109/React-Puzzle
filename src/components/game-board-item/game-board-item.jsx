@@ -10,7 +10,7 @@ const GameBoardItem = ({
   isChecked,
   sentenceIndex,
   sentenceWords,
-  setIsChecked
+  setIsChecked,
 }) => {
   const { isAutoComplete } = useContext(PuzzleContext);
 
@@ -21,13 +21,11 @@ const GameBoardItem = ({
   if (isAutoComplete) {
     disableClass = "disabled";
   }
-
-
-
   if (!sentenceWords) return null;
+  let greenBorder = !sentenceWords[0]?.autocompleted ? "greenBorder" : "";
 
   return (
-    <div className={`gameBoardItem ${disableClass} ${isShow}`}>
+    <div className={`gameBoardItem ${disableClass} ${isShow} ${greenBorder}`}>
       {currentRows && <div className="gameBoardItemNum">{index + 1}</div>}
       {currentRows &&
         sentenceWords.map((word, idx) => (

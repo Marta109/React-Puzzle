@@ -31,8 +31,9 @@
 
 .gameBoardItemWord.disabled {
   pointer-events: none;
-  opacity: 0.7;
+  /* opacity: 0.9; */
   margin: 0;
   background-color: #616499;
   border-radius: 5px;
 }
+
