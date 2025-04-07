@@ -10,10 +10,10 @@ const GameBoard = ({ showPainting, isChecked, setIsChecked }) => {
   const gameBoardStyle = showPainting
     ? {
         backgroundImage: `url(https://raw.githubusercontent.com/rolling-scopes-school/rss-puzzle-data/main/images/${levelData.imageSrc})`,
-        backgroundSize: "contain",
+        backgroundSize: "cover",
         backgroundPosition: "center",
-        width: "51%",
-        height: "100%",
+        width: "90%",
+        height: "100vh",
         borderRadius: "16px",
         objectFit: "fill",
       }

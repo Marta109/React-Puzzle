@@ -166,7 +166,7 @@ function reducer(state, action) {
         ...state,
         status: "finished",
       };
-      
+
     case "UPDATE_SELECTED_WORDS": {
       const updatedSelectedWords = action.payload;
 
@@ -182,18 +182,19 @@ function reducer(state, action) {
     }
 
     case "AUTO_COMPLETE": {
-      const roundIndex = state.currentPage;
       const sentenceIndex = state.currentRound;
-
       const correctWords = state.currentSentence.textExample.split(" ");
-      const newSelectedWords = [...state.selectedWords];
-      const newRow = correctWords.map((word) => ({
+
+      const newRow = correctWords.map((word, index) => ({
         word,
         isCorrect: true,
         isCompleted: true,
+        stringArrLength: correctWords.length,
+        itemIndex: index,
       }));
 
-      newSelectedWords[roundIndex][sentenceIndex] = newRow;
+      const newSelectedWords = [...state.selectedWords];
+      newSelectedWords[sentenceIndex] = newRow;
 
       return {
         ...state,
@@ -203,6 +204,7 @@ function reducer(state, action) {
         isAutoComplete: true,
       };
     }
+
     default:
       throw new Error("Unknown action type");
   }
