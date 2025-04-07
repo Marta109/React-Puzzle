@@ -11,7 +11,7 @@ const GameBoardItemWord = ({
   setIsChecked,
   index,
 }) => {
-  const { isCompleted, isAutoComplete, dispatch } = useContext(PuzzleContext);
+  const { isAutoComplete, dispatch } = useContext(PuzzleContext);
 
   const handleRemove = () => {
     if (!word) return;
@@ -40,7 +40,6 @@ const GameBoardItemWord = ({
   return (
     <div
       className={`gameBoardItemWord draggable ${checkedClass} `}
-      draggable={isActive && !isCompleted}
       onClick={handleRemove}
     >
       {word ? (

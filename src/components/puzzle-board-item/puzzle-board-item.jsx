@@ -23,8 +23,7 @@ const PuzzleBoardItem = ({ word, index, itemIndex, stringArrLength }) => {
 
   return (
     <div
-      className="puzzleItem draggable"
-      draggable="true"
+      className="puzzleItem"
       id={`puzzleItem_${index}`}
       onClick={handleClick}
     >

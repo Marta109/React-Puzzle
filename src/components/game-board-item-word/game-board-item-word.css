@@ -15,9 +15,7 @@
   margin: 5px;
 }
 
-.draggable {
-  cursor: grab;
-}
+
 
 .gameBoardItemWord:hover {
   border-color: rgb(100, 108, 255);

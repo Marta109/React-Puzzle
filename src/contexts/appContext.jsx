@@ -243,6 +243,7 @@ function reducer(state, action) {
   }
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const PuzzleContext = createContext();
 
 export function PuzzleProvider({ children }) {
