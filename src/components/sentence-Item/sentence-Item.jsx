@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import Button from "../button/button";
-import "./sentence-Item.css";
+import "./sentence-item.css";
 
 function SentenceItem({ sentence, audio, translate, index }) {
   const [showTranslate, setShowTranslate] = useState(false);
