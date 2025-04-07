@@ -72,7 +72,7 @@ function reducer(state, action) {
 
       const updatedSelectedWords = [...state.selectedWords];
 
-      updatedSelectedWords[state.currentPage + 1] = new Array(
+      updatedSelectedWords[state.currentRound + 1] = new Array(
         wordsNext.length
       ).fill(null);
 
