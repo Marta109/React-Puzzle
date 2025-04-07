@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { PuzzleContext } from "../../contexts/appContext";
 import Button from "../button/button";
-import SentenceItem from "../sentence-Item/sentence-Item";
+import SentenceItem from "../sentence-item/sentence-Item";
 import "./modal.css";
 
 const Modal = ({ setShowModal }) => {
