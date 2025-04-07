@@ -119,7 +119,7 @@ const Modal = ({ setShowModal }) => {
                             <p>
                               It looks like all sentences were completed
                               automatically. Try harder next time — you've got
-                              this! 💪
+                              this! 💪  
                             </p>
                           </div>
                         )}
