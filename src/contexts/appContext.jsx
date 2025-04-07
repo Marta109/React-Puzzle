@@ -14,6 +14,8 @@ const initialState = {
   selectedWords: [],
   availableWords: [],
   isAutoComplete: false,
+  autoCompletedSentences: [],
+  userCompletedSentences: [],
 };
 
 function reducer(state, action) {
@@ -76,6 +78,17 @@ function reducer(state, action) {
         wordsNext.length
       ).fill(null);
 
+      const updatedUserCompleted = !state.isAutoComplete
+        ? [
+            ...state.userCompletedSentences,
+            {
+              audio: state.currentSentence.audioExample,
+              sentence: state.currentSentence.textExample,
+              translate: state.currentSentence.textExampleTranslate,
+            },
+          ]
+        : state.userCompletedSentences;
+
       return {
         ...state,
         currentRound: nextIndex,
@@ -83,6 +96,7 @@ function reducer(state, action) {
         selectedWords: updatedSelectedWords,
         availableWords: nextAvailableWords,
         isAutoComplete: false,
+        userCompletedSentences: updatedUserCompleted,
       };
     }
 
@@ -97,16 +111,24 @@ function reducer(state, action) {
         itemIndex: idx,
       }));
 
+      const currentRoundWords = state.allRounds[nextPage].words || [];
+      const newSelectedWords = currentRoundWords.map((sentence) => {
+        const length = sentence.textExample.split(" ").length;
+        return new Array(length).fill(null);
+      });
+
       return {
         ...state,
         currentPage: nextPage,
         currentRound: 0,
         levelData: state.allRounds[nextPage]?.levelData || null,
-        sentenceArr: state.allRounds[nextPage].words || [],
+        sentenceArr: currentRoundWords,
         currentSentence: firstSentenceNextRound,
-        selectedWords: state.selectedWords,
+        selectedWords: newSelectedWords,
         availableWords: availableWordsNextRound,
         isAutoComplete: false,
+        userCompletedSentences: [],
+        autoCompletedSentences: [],
       };
     }
 
@@ -197,12 +219,22 @@ function reducer(state, action) {
       const newSelectedWords = [...state.selectedWords];
       newSelectedWords[sentenceIndex] = newRow;
 
+      const updatedAutoCompleted = [
+        ...state.autoCompletedSentences,
+        {
+          audio: state.currentSentence.audioExample,
+          sentence: state.currentSentence.textExample,
+          translate: state.currentSentence.textExampleTranslate,
+        },
+      ];
+
       return {
         ...state,
         selectedWords: newSelectedWords,
         availableWords: [],
         isCompleted: true,
         isAutoComplete: true,
+        autoCompletedSentences: updatedAutoCompleted,
       };
     }
 

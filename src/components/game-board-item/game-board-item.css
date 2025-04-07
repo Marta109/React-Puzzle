@@ -17,19 +17,19 @@
   pointer-events: none;
   /* opacity: 0.9; */
   margin: 0;
-  background-color: #616499;
+  background-color: #292c32;
+  color: #ffc107;
   border-radius: 5px;
 }
 
-/* .gameBoardItem.disabled.greenBorder {
-  border: 1px solid #e28c3b;
-} */
 .gameBoardItem.disabled.greenBorder .gameBoardItemNum {
   color: #e28c3b;
   /* background-color: #e28c3b; */
   /* border: 1px solid #e28c3b; */
   border-radius: 5px;
   /* background-color: #646cff; */
+  /* background-color: #646cff;
+  color: black; */
 }
 .gameBoardItem.disabled.greenBorder .gameBoardItemWord {
   background-color: #646cff;

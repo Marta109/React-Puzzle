@@ -1,0 +1,42 @@
+.sentence-item-all {
+  border-bottom: 2px solid #ed5a00;
+}
+.sentence-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  cursor: pointer;
+  padding: 5px;
+}
+.sentence-item:hover {
+  background-color: #965f40;
+  border-radius: 5px;
+  /* color: black; */
+}
+
+.sentence-translate {
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.sentence-translate-wrapper {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
+}
+
+.sentence-translate-wrapper.show {
+  max-height: 100px;
+  opacity: 1;
+}
+
+.sentence-translate {
+  padding: 0.5rem 1rem;
+  background-color: #242b34;
+  border-left: 3px solid #242b34;
+  margin-top: 0.5rem;
+  border-radius: 4px;
+}
