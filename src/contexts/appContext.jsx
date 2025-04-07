@@ -129,10 +129,13 @@ function reducer(state, action) {
 
       const newSelectedWords = [...state.selectedWords];
       newSelectedWords[currentRound] = currentRow;
+
       return {
         ...state,
         selectedWords: newSelectedWords,
-        availableWords: state.availableWords.filter((w) => w.word !== word),
+        availableWords: state.availableWords.filter(
+          (w) => w.itemIndex !== itemIndex
+        ),
       };
     }
 
@@ -163,6 +166,7 @@ function reducer(state, action) {
         ...state,
         status: "finished",
       };
+      
     case "UPDATE_SELECTED_WORDS": {
       const updatedSelectedWords = action.payload;
 

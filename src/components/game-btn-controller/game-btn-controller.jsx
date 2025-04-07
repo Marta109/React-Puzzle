@@ -10,7 +10,6 @@ const GameBtnController = ({ setShowPainting, setIsChecked, showPainting }) => {
     availableWords,
     isAutoComplete,
     currentRound,
-    currentPage,
     sentenceArr,
     dispatch,
   } = useContext(PuzzleContext);
@@ -33,7 +32,7 @@ const GameBtnController = ({ setShowPainting, setIsChecked, showPainting }) => {
     const correctWords = currentSentence.textExample.split(" ");
     let isCorrect = true;
 
-    const updatedRoundWords = selectedWords[currentPage].map((item, index) => {
+    const updatedRoundWords = selectedWords[currentRound].map((item, index) => {
       if (!item) return null;
 
       const wordInGameBoard = item.word;
@@ -46,7 +45,7 @@ const GameBtnController = ({ setShowPainting, setIsChecked, showPainting }) => {
     });
 
     const updatedSelectedWords = [...selectedWords];
-    updatedSelectedWords[currentPage] = updatedRoundWords;
+    updatedSelectedWords[currentRound] = updatedRoundWords;
 
     dispatch({
       type: "UPDATE_SELECTED_WORDS",

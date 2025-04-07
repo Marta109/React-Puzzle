@@ -6,7 +6,7 @@ import "./puzzle-board-item.css";
 const PuzzleBoardItem = ({ word, index, itemIndex, stringArrLength }) => {
   const { dispatch, availableWords } = useContext(PuzzleContext);
 
-  const wordObj = availableWords.find((el) => el.word === word);
+  const wordObj = availableWords.find((el) => el.itemIndex === itemIndex);
 
   const handleClick = () => {
     if (wordObj) {
