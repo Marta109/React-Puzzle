@@ -19,8 +19,7 @@ const GameBoard = ({ showPainting, isChecked, setIsChecked }) => {
       }
     : {};
 
-  const roundWords = selectedWords[currentRound] || [];
-
+  // let roundWords = selectedWords[currentRound] || [];
   return (
     <div className="game-board" style={gameBoardStyle}>
       {sentenceArr.map((word, index) => (
@@ -34,8 +33,8 @@ const GameBoard = ({ showPainting, isChecked, setIsChecked }) => {
           isCompleted={word.isCompleted}
           // roundIndex={currentPage}
           sentenceIndex={index}
-          sentenceWords={roundWords}
-          setIsChecked={setIsChecked} 
+          sentenceWords={selectedWords[index]}
+          setIsChecked={setIsChecked}
         />
       ))}
     </div>

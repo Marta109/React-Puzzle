@@ -30,7 +30,7 @@ const GameBoardItemWord = ({
       ? "correctWord"
       : "inCorrectWord"
     : "";
-  if (word === null ) {
+  if (word === null || !isActive) {
     checkedClass = "";
   }
 

@@ -22,6 +22,8 @@ const GameBoardItem = ({
     disableClass = "disabled";
   }
 
+
+
   if (!sentenceWords) return null;
 
   return (

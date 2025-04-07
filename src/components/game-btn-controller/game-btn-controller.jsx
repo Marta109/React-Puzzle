@@ -76,6 +76,7 @@ const GameBtnController = ({ setShowPainting, setIsChecked, showPainting }) => {
     setIsCheckEnabled(false);
     setIsAutoComplete(true);
     setNextPuzzleEnabled(false);
+    setIsChecked(false);
     dispatch({ type: "NEXT_SENTENCE" });
   };
 
