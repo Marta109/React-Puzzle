@@ -15,8 +15,7 @@ const GameBoardItemWord = ({
 
   const handleRemove = () => {
     if (!word) return;
-    console.log("try");
-    console.log(word);
+
     dispatch({
       type: "REMOVE_SELECTED_WORD",
       payload: {
