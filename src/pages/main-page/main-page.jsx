@@ -20,6 +20,7 @@ const MainPage = () => {
         key={`game-${currentPage}`}
         showPainting={showPainting}
         isChecked={isChecked}
+        setIsChecked={setIsChecked}
       />
       {!showPainting && <PuzzleBoard key={`puzzle-${currentPage}`} />}
       {showPainting && <PaintingInfo />}

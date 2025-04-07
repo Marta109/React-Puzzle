@@ -9,22 +9,23 @@ const GameBoardItem = ({
   showPainting,
   isChecked,
   sentenceIndex,
-  sentenceWords, 
+  sentenceWords,
+  setIsChecked
 }) => {
   const { isAutoComplete } = useContext(PuzzleContext);
 
   const isShow = showPainting ? "fadeOutOnGameBoard" : "";
   const isActive = currentRound === index;
   let currentRows = currentRound >= index;
+  let disableClass = isActive ? "active" : "disabled";
+  if (isAutoComplete) {
+    disableClass = "disabled";
+  }
 
   if (!sentenceWords) return null;
 
   return (
-    <div
-      className={`gameBoardItem ${
-        !isAutoComplete ? "active" : "disabled"
-      }  ${isShow} ${isActive ? "" : "disabled"} `}
-    >
+    <div className={`gameBoardItem ${disableClass} ${isShow}`}>
       {currentRows && <div className="gameBoardItemNum">{index + 1}</div>}
       {currentRows &&
         sentenceWords.map((word, idx) => (
@@ -32,6 +33,7 @@ const GameBoardItem = ({
             key={idx}
             word={word}
             isActive={isActive}
+            setIsChecked={setIsChecked}
             isChecked={isChecked}
             sentenceIndex={sentenceIndex}
             stringArrLength={sentenceWords.length}

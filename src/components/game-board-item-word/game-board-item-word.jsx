@@ -8,6 +8,7 @@ const GameBoardItemWord = ({
   isChecked,
   sentenceIndex,
   word,
+  setIsChecked,
   index,
 }) => {
   const { isCompleted, isAutoComplete, dispatch } = useContext(PuzzleContext);
@@ -21,6 +22,7 @@ const GameBoardItemWord = ({
         itemIndex: word.itemIndex,
       },
     });
+    setIsChecked(false);
   };
 
   let checkedClass = isChecked
@@ -28,7 +30,7 @@ const GameBoardItemWord = ({
       ? "correctWord"
       : "inCorrectWord"
     : "";
-  if (word === null) {
+  if (word === null ) {
     checkedClass = "";
   }
 
