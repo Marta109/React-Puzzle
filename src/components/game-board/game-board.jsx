@@ -4,7 +4,7 @@ import GameBoardItem from "../game-board-item/game-board-item";
 import "./game-board.css";
 
 const GameBoard = ({ showPainting, isChecked }) => {
-  const { sentenceArr, currentRound, levelData, currentPage } =
+  const { sentenceArr, currentRound, levelData, currentPage, selectedWords } =
     useContext(PuzzleContext);
 
   const gameBoardStyle = showPainting
@@ -19,6 +19,8 @@ const GameBoard = ({ showPainting, isChecked }) => {
       }
     : {};
 
+  const roundWords = selectedWords[currentRound] || [];
+
   return (
     <div className="game-board" style={gameBoardStyle}>
       {sentenceArr.map((word, index) => (
@@ -30,8 +32,9 @@ const GameBoard = ({ showPainting, isChecked }) => {
           index={index}
           isChecked={isChecked}
           isCompleted={word.isCompleted}
-          roundIndex={currentPage}
+          // roundIndex={currentPage}
           sentenceIndex={index}
+          sentenceWords={roundWords} 
         />
       ))}
     </div>

@@ -6,7 +6,6 @@ import "./game-board-item-word.css";
 const GameBoardItemWord = ({
   isActive,
   isChecked,
-  roundIndex,
   sentenceIndex,
   word,
   index,
@@ -17,9 +16,9 @@ const GameBoardItemWord = ({
     dispatch({
       type: "REMOVE_SELECTED_WORD",
       payload: {
-        roundIndex,
         sentenceIndex,
         indexToRemove: index,
+        itemIndex: word.itemIndex,
       },
     });
   };

@@ -114,9 +114,9 @@ function reducer(state, action) {
       const { word, stringArrLength, itemIndex } = action.payload;
       const wordObj = { word, stringArrLength, itemIndex };
 
-      const { currentPage } = state;
+      const { currentRound } = state;
 
-      const currentRow = [...(state.selectedWords[currentPage] || [])];
+      const currentRow = [...(state.selectedWords[currentRound] || [])];
 
       while (currentRow.length < stringArrLength) {
         currentRow.push(null);
@@ -128,8 +128,7 @@ function reducer(state, action) {
       }
 
       const newSelectedWords = [...state.selectedWords];
-      newSelectedWords[currentPage] = currentRow;
-
+      newSelectedWords[currentRound] = currentRow;
       return {
         ...state,
         selectedWords: newSelectedWords,
@@ -138,18 +137,19 @@ function reducer(state, action) {
     }
 
     case "REMOVE_SELECTED_WORD": {
-      const { roundIndex, indexToRemove } = action.payload;
+      const { indexToRemove, itemIndex } = action.payload;
+      const { currentRound } = state;
 
-      const selectedRow = state.selectedWords[roundIndex];
+      const selectedRow = state.selectedWords[currentRound];
       const wordObj = selectedRow?.[indexToRemove];
 
-      if (!wordObj) return state;
+      if (!wordObj || wordObj.itemIndex !== itemIndex) return state;
 
       const newSelectedWords = [...state.selectedWords];
-      const newRow = [...newSelectedWords[roundIndex]];
+      const newRow = [...newSelectedWords[currentRound]];
 
       newRow[indexToRemove] = null;
-      newSelectedWords[roundIndex] = newRow;
+      newSelectedWords[currentRound] = newRow;
 
       return {
         ...state,

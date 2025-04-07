@@ -12,7 +12,11 @@ const PuzzleBoardItem = ({ word, index, itemIndex, stringArrLength }) => {
     if (wordObj) {
       dispatch({
         type: "ADD_SELECTED_WORD",
-        payload: { word, stringArrLength, itemIndex },
+        payload: {
+          word,
+          stringArrLength,
+          itemIndex: itemIndex + "-" + wordObj.word,
+        },
       });
     }
   };

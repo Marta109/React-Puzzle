@@ -8,20 +8,18 @@ const GameBoardItem = ({
   index,
   showPainting,
   isChecked,
-  roundIndex,
   sentenceIndex,
+  sentenceWords, // Получаем слова для текущего раунда
 }) => {
-  const { isAutoComplete, selectedWords } = useContext(PuzzleContext);
+  const { isAutoComplete } = useContext(PuzzleContext);
 
   const isShow = showPainting ? "fadeOutOnGameBoard" : "";
   const isActive = currentRound === index;
   let currentRows = currentRound >= index;
 
-  const sentenceWords = selectedWords?.[roundIndex] || [];
+  // Отображаем только слова, соответствующие текущему раунду
+  if (!sentenceWords) return null;
 
-  if (!sentenceWords) return;
-
-  // console.log(sentenceWords);
   return (
     <div
       className={`gameBoardItem ${
@@ -36,7 +34,6 @@ const GameBoardItem = ({
             word={word}
             isActive={isActive}
             isChecked={isChecked}
-            roundIndex={roundIndex}
             sentenceIndex={sentenceIndex}
             stringArrLength={sentenceWords.length}
             index={idx}
