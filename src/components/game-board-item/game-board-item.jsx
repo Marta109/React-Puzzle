@@ -9,7 +9,7 @@ const GameBoardItem = ({
   showPainting,
   isChecked,
   sentenceIndex,
-  sentenceWords, // Получаем слова для текущего раунда
+  sentenceWords, 
 }) => {
   const { isAutoComplete } = useContext(PuzzleContext);
 
@@ -17,7 +17,6 @@ const GameBoardItem = ({
   const isActive = currentRound === index;
   let currentRows = currentRound >= index;
 
-  // Отображаем только слова, соответствующие текущему раунду
   if (!sentenceWords) return null;
 
   return (
