@@ -8,6 +8,7 @@ import MainPage from "./pages/main-page/main-page";
 import { PuzzleProvider } from "./contexts/appContext";
 
 import "./App.css";
+import LevelPage from "./pages/level-page/level-page";
 
 function App() {
   return (
@@ -34,6 +35,10 @@ function App() {
         <Route
           path="/puzzle-game"
           element={<MainLayout>{<MainPage />}</MainLayout>}
+        />
+        <Route
+          path="/levels"
+          element={<MainLayout>{<LevelPage />}</MainLayout>}
         />
 
         <Route

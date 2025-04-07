@@ -76,6 +76,14 @@
   border-radius: 10px;
 }
 
+.glow-on-hover.active{
+  color: #e28c3b;
+  border: 3px solid #e28c3b;
+  box-shadow: 0 0 10px rgba(226, 140, 59, 0.6);
+  
+  background-color: #ff7300; /* Uncommented background color */
+}
+
 @keyframes glowing {
   0% {
     background-position: 0 0;
