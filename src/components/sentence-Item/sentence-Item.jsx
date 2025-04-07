@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import Button from "../button/button";
 import "./sentence-item.css";
 
-function SentenceItem({ sentence, audio, translate, index }) {
+const SentenceItem = ({ sentence, audio, translate, index }) => {
   const [showTranslate, setShowTranslate] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef(null);
@@ -55,6 +55,6 @@ function SentenceItem({ sentence, audio, translate, index }) {
       </div>
     </div>
   );
-}
+};
 
 export default SentenceItem;

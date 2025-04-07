@@ -1,11 +1,10 @@
 import { useContext, useState } from "react";
 import { PuzzleContext } from "../../contexts/appContext";
 import Button from "../button/button";
-import SentenceItem from "../sentence-item/sentence-item";
+import SentenceItem from "../sentence-Item/sentence-Item";
 import "./modal.css";
 
 const Modal = ({ setShowModal }) => {
-  // eslint-disable-next-line no-unused-vars
   const [isOpen, setIsOpen] = useState(false);
   const {
     levelData,
