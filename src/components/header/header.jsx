@@ -10,7 +10,7 @@ const Header = () => {
     <div className="app-header">
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
         <div className="container-fluid">
-          <NavLink className="navbar-brand" to="/game-board">
+          <NavLink className="navbar-brand" to="/puzzle-game">
             <img src={puzzleIcon} alt="puzzle icon" className="puzzle-icon" />
             English -Puzzle
           </NavLink>
