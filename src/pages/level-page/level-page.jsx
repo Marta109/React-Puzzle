@@ -3,15 +3,17 @@ import { PuzzleContext } from "../../contexts/appContext";
 import PuzzleApi from "../../server/puzzleApi";
 import Button from "../../components/button/button";
 import Spinner from "../../components/spinner/spinner";
+import { useNavigate } from "react-router-dom";
 import "./level-page.css";
 
 const LevelPage = () => {
-  const { roundsCount, level, currentPage, allRounds } =
+  const { roundsCount, level, currentPage, allRounds, dispatch } =
     useContext(PuzzleContext);
   const [selectedLevel, setSelectedLevel] = useState(level);
   const [displayedRounds, setDisplayedRounds] = useState(allRounds);
   const [selectedRoundsCount, setSelectedRoundsCount] = useState(roundsCount);
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const loadLevelData = async () => {
@@ -37,6 +39,18 @@ const LevelPage = () => {
 
   const handleLevelClick = (clickedLevel) => {
     setSelectedLevel(clickedLevel);
+  };
+  const handlePictureClick = (selectedLevel, selectedRound) => {
+    dispatch({
+      type: "SET_NEW_LEVEL_DATA",
+      payload: {
+        level: selectedLevel,
+        page: selectedRound,
+        roundsCount: selectedRoundsCount,
+      },
+    });
+
+    navigate("/puzzle-game");
   };
 
   return (
@@ -72,9 +86,18 @@ const LevelPage = () => {
           Array.isArray(displayedRounds) &&
           displayedRounds.map((round, index) => {
             const isPassed = selectedLevel === level && index <= currentPage;
-            const cardClass = `card text-bg ${isPassed ? "card--passed" : ""}`;
+            // const cardClass = `card text-bg ${isPassed ? "card--passed" : ""}`;
+            const isActive = selectedLevel === level && index === currentPage;
+            const cardClass = `card text-bg ${isPassed ? "card--passed" : ""} ${
+              isActive ? "card--active" : ""
+            }`;
+
             return (
-              <div className="card-item" key={index}>
+              <div
+                className="card-item"
+                key={index}
+                onClick={() => handlePictureClick(selectedLevel, index)}
+              >
                 <div className={cardClass}>
                   <img
                     src={`https://raw.githubusercontent.com/rolling-scopes-school/rss-puzzle-data/main/images/${round.levelData.cutSrc}`}

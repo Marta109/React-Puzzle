@@ -56,6 +56,7 @@ function reducer(state, action) {
         ...state,
         status: "error",
       };
+
     case "START_GAME":
       return {
         ...state,
@@ -238,6 +239,46 @@ function reducer(state, action) {
       };
     }
 
+    case "SET_NEW_LEVEL_DATA": {
+      const { level, page, roundsCount } = action.payload;
+
+      const selectedRound = state.allRounds?.[page];
+      if (!selectedRound) return state;
+
+      const firstSentence = selectedRound.words?.[0];
+      if (!firstSentence) return state;
+
+      const wordsArr = firstSentence.textExample.split(" ");
+      const availableWords = wordsArr.map((word, idx) => ({
+        word,
+        stringArrLength: wordsArr.length - 1,
+        itemIndex: idx,
+      }));
+
+      const currentRoundWords = selectedRound.words;
+      const allSelectedWords = currentRoundWords.map((sentence) => {
+        const length = sentence.textExample.split(" ").length;
+        return new Array(length).fill(null);
+      });
+
+      return {
+        ...state,
+        level,
+        currentPage: page,
+        currentRound: 0,
+        levelData: selectedRound.levelData,
+        sentenceArr: currentRoundWords,
+        currentSentence: firstSentence,
+        selectedWords: allSelectedWords,
+        availableWords,
+        isAutoComplete: false,
+        autoCompletedSentences: [],
+        userCompletedSentences: [],
+        status: "ready",
+        roundsCount: roundsCount,
+      };
+    }
+
     default:
       throw new Error("Unknown action type");
   }
@@ -262,6 +303,14 @@ export function PuzzleProvider({ children }) {
           payload: {
             rounds: response.data.rounds,
             roundsCount: response.data.roundsCount,
+          },
+        });
+
+        dispatch({
+          type: "SET_NEW_LEVEL_DATA",
+          payload: {
+            level: state.level,
+            page: 0,
           },
         });
       } else {

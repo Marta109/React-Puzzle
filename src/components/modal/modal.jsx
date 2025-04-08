@@ -48,9 +48,9 @@ const Modal = ({ setShowModal }) => {
                 ></button>
               </div>
               <div className="modal-body">
-                <div class="movie-details-container">
+                <div className="movie-details-container">
                   <img
-                    class="img-fluid"
+                    className="img-fluid"
                     alt="poster"
                     src={`https://raw.githubusercontent.com/rolling-scopes-school/rss-puzzle-data/main/images/${levelData.imageSrc}`}
                   />
@@ -86,7 +86,7 @@ const Modal = ({ setShowModal }) => {
                 </div>
                 <div className="card">
                   <div className="card-body">
-                    <div class="descr-item">
+                    <div className="descr-item">
                       <h6>Autocompleted: I don't know </h6>
                       <div className="sentence-container">
                         {autoCompletedSentences.map((item, index) => (
