@@ -47,10 +47,15 @@ const Header = () => {
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link memory-icon" to="/memory-game">
+                <a
+                  className="nav-link memory-icon"
+                  href="https://marta109.github.io/Memory-game/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   Memory Game
                   <i className="fa-solid fa-gamepad header-icons memory-icon"></i>
-                </NavLink>
+                </a>
               </li>
               <li className="nav-item">
                 <NavLink className="nav-link" to="/">
