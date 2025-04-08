@@ -1,4 +1,6 @@
 .spinner {
   margin: 0 auto;
-  color:#ffc107;
+  color: #ffc107;
+  font-size: 25px;
+  padding: 20px;
 }

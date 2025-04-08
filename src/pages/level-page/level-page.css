@@ -39,9 +39,9 @@
 .level-container .level-info {
   margin-top: 20px;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
-  gap: 30px;
+  /* gap: 30px; */
   flex-wrap: wrap;
   background-color: #242b34;
   padding: 10px;
@@ -50,13 +50,22 @@
   font-weight: bold;
   width: 50%;
   margin: 20px auto;
-  text-align: center;
+  /* text-align: center; */
 }
 
 .card-container .card-img.item {
   width: 300px;
   height: 300px;
   object-fit: cover;
+}
+
+.level-info__selected {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  margin-top: 10px;
+  color: whitesmoke;
+  font-weight: normal;
 }
 
 .card-container .card {
@@ -93,9 +102,9 @@
   font-weight: bold;
   color: #e28c3b;
   text-align: center;
+  background-color: rgba(50, 50, 50, 0.7);
+  border-radius: 10px;
 }
-
-
 
 .card--passed {
   border: 3px solid #e28c3b;
@@ -108,3 +117,7 @@
 /* .card--passed:hover {
   transform: scale(1.05);
 } */
+
+.spinner-container {
+  margin: 10px auto;
+}
