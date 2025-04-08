@@ -19,6 +19,7 @@ const GameBtnController = ({
     dispatch,
     currentPage,
     roundsCount,
+    level,
   } = useContext(PuzzleContext);
 
   const [autoComplete, setIsAutoComplete] = useState(true);
@@ -115,18 +116,27 @@ const GameBtnController = ({
             classes="btn-header"
             onClick={() => setShowModal(true)}
           />
-          <Button
-            type="button"
-            child={
-              currentPage + 1 === roundsCount ? "Next Level" : "Next Round"
-            }
-            classes="btn-header"
-            onClick={
-              currentPage + 1 === roundsCount
-                ? handleNextLevel
-                : handleNextRound
-            }
-          />
+          {level === 6 && currentPage + 1 === roundsCount ? (
+            <Button
+              type="button"
+              child="Finish"
+              classes="btn-header"
+              onClick={() => setShowModal(true)}
+            />
+          ) : (
+            <Button
+              type="button"
+              child={
+                currentPage + 1 === roundsCount ? "Next Level" : "Next Round"
+              }
+              classes="btn-header"
+              onClick={
+                currentPage + 1 === roundsCount
+                  ? handleNextLevel
+                  : handleNextRound
+              }
+            />
+          )}
         </>
       ) : (
         <>
