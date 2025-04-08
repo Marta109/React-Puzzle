@@ -10,16 +10,17 @@ const Confetti = () => {
   const [isRunning, setIsRunning] = useState(true);
 
   useEffect(() => {
-    document.body.style.overflow = "hidden";
-    const handleResize = () => {
+    if (typeof window !== "undefined") {
+      // document.body.style.overflow = "hidden";
+      const handleResize = () => {
         setSize({ width: window.innerWidth, height: window.innerHeight });
-    };
-    
-    window.addEventListener("resize", handleResize);
-    
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
+      };
+
+      window.addEventListener("resize", handleResize);
+      return () => {
+        window.removeEventListener("resize", handleResize);
+      };
+    }
   }, []);
 
   useEffect(() => {

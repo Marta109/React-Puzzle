@@ -5,6 +5,7 @@
   color: #ffffff;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
   animation: fadeIn 1s ease-in-out forwards;
+  height: 100vh;
 }
 
 .finish-screen h1 {
@@ -22,6 +23,22 @@
 
 .finish-screen p:nth-child(2) {
   font-weight: bold;
+}
+
+.finish-screen strong {
+  color: #ffc107;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.finish-screen .score {
+  font-size: 2rem;
+  color: #28a745;
+  margin-top: 20px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+.finish-screen .score span {
+  font-weight: bold;
+  color: #ffc107;
 }
 
 @keyframes fadeIn {

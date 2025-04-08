@@ -278,7 +278,7 @@ function reducer(state, action) {
         roundsCount: roundsCount,
       };
     }
-    
+
     case "NEXT_LEVEL": {
       const newLevel = state.level + 1;
 
@@ -326,7 +326,7 @@ export function PuzzleProvider({ children }) {
           type: "SET_NEW_LEVEL_DATA",
           payload: {
             level: state.level,
-            page: 0,
+            page: state.currentPage || 0,
             roundsCount: response.data.roundsCount,
           },
         });
@@ -334,7 +334,7 @@ export function PuzzleProvider({ children }) {
         dispatch({ type: "DATA_FAILED" });
       }
     });
-  }, [state.level]);
+  }, [state.level, state.currentPage]);
 
   return (
     <PuzzleContext.Provider value={{ ...state, dispatch }}>
