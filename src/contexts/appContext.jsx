@@ -278,6 +278,22 @@ function reducer(state, action) {
         roundsCount: roundsCount,
       };
     }
+    
+    case "NEXT_LEVEL": {
+      const newLevel = state.level + 1;
+
+      return {
+        ...state,
+        level: newLevel,
+        currentPage: 0,
+        currentRound: 0,
+        sentenceArr: [],
+        selectedWords: [],
+        availableWords: [],
+        autoCompletedSentences: [],
+        userCompletedSentences: [],
+      };
+    }
 
     default:
       throw new Error("Unknown action type");
@@ -311,6 +327,7 @@ export function PuzzleProvider({ children }) {
           payload: {
             level: state.level,
             page: 0,
+            roundsCount: response.data.roundsCount,
           },
         });
       } else {

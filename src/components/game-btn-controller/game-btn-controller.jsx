@@ -17,6 +17,8 @@ const GameBtnController = ({
     currentRound,
     sentenceArr,
     dispatch,
+    currentPage,
+    roundsCount,
   } = useContext(PuzzleContext);
 
   const [autoComplete, setIsAutoComplete] = useState(true);
@@ -89,12 +91,20 @@ const GameBtnController = ({
     setNextPuzzleEnabled(false);
   };
 
+  const handleNextLevel = () => {
+    setShowPainting(false);
+    setNextPuzzleEnabled(false);
+    setIsAutoComplete(true);
+    dispatch({ type: "NEXT_LEVEL" });
+  };
+
   const handleNextRound = () => {
     setShowPainting(false);
     setNextPuzzleEnabled(false);
     setIsAutoComplete(true);
     dispatch({ type: "NEXT_ROUND" });
   };
+
   return (
     <div className="puzzlesBoardBtns">
       {showPainting && !nextPuzzleEnabled ? (
@@ -107,9 +117,15 @@ const GameBtnController = ({
           />
           <Button
             type="button"
-            child="next round"
+            child={
+              currentPage + 1 === roundsCount ? "Next Level" : "Next Round"
+            }
             classes="btn-header"
-            onClick={handleNextRound}
+            onClick={
+              currentPage + 1 === roundsCount
+                ? handleNextLevel
+                : handleNextRound
+            }
           />
         </>
       ) : (
