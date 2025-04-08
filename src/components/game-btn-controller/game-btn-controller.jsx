@@ -8,6 +8,7 @@ const GameBtnController = ({
   setIsChecked,
   showPainting,
   setShowModal,
+  setShowFinishScreen,
 }) => {
   const {
     currentSentence,
@@ -121,7 +122,7 @@ const GameBtnController = ({
               type="button"
               child="Finish"
               classes="btn-header"
-              onClick={() => setShowModal(true)}
+              onClick={() => setShowFinishScreen(true)}
             />
           ) : (
             <Button

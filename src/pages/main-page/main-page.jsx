@@ -8,12 +8,18 @@ import "./main-page.css";
 import PaintingInfo from "../../components/painting-info/painting-info";
 import GameBtnController from "../../components/game-btn-controller/game-btn-controller";
 import Modal from "../../components/modal/modal";
+import FinishScreen from "../../components/finish-screen/finish-screen";
 
 const MainPage = () => {
   const { currentPage } = useContext(PuzzleContext);
   const [showPainting, setShowPainting] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [showFinishScreen, setShowFinishScreen] = useState(false);
+
+  if (showFinishScreen) {
+    return <FinishScreen />;
+  }
 
   return (
     <div className="main-page-container">
@@ -33,6 +39,7 @@ const MainPage = () => {
         setIsChecked={setIsChecked}
         showPainting={showPainting}
         setShowModal={setShowModal}
+        setShowFinishScreen={setShowFinishScreen}
       />
     </div>
   );
