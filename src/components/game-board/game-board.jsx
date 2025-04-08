@@ -19,8 +19,14 @@ const GameBoard = ({ showPainting, isChecked, setIsChecked }) => {
       }
     : {};
 
+  const gameBoardClass = showPainting
+    ? "game-board show-background"
+    : "game-board";
+
+    
+
   return (
-    <div className="game-board" style={gameBoardStyle}>
+    <div className={gameBoardClass} style={gameBoardStyle}>
       {sentenceArr.map((word, index) => (
         <GameBoardItem
           showPainting={showPainting}

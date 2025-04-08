@@ -62,14 +62,33 @@
 }
 
 .fadeOutOnGameBoard {
-  animation: fadeOutAnimation 1s ease forwards;
+  animation: fadeOutAnimation 2.5s ease forwards;
 }
 
 @keyframes fadeOutAnimation {
-  from {
+  0% {
     opacity: 1;
+    transform: scale(1);
   }
-  to {
+  100% {
     opacity: 0;
+    transform: scale(1.05);
+  }
+}
+
+.game-board.show-background {
+  animation: fadeInBg 3s ease-in forwards;
+  animation-delay: 1s;
+  opacity: 0;
+}
+
+@keyframes fadeInBg {
+  0% {
+    opacity: 0;
+    filter: blur(8px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
   }
 }
