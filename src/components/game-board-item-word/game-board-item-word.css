@@ -11,7 +11,7 @@
   position: relative;
   font-size: large;
   font-weight: 500;
-  text-shadow: 2px 2px 5px #535bf2;
+  text-shadow: 2px 2px 5px #e28c3b;
   margin: 5px;
 }
 
@@ -33,5 +33,6 @@
   margin: 0;
   background-color: #616499;
   border-radius: 5px;
+  cursor: not-allowed;
 }
 

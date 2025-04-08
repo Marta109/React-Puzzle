@@ -1,15 +1,25 @@
 .main-page-container {
-  height: 100%;
-  object-fit: fill;
-  background-image: url("../../assets/images/bg/main_bg.png");
-  object-fit: fill;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  position: relative;
   padding: 0 10px;
   background-color: #03071e;
   overflow: hidden;
-  /* filter: blur(8px); */
+  z-index: 0;
+  padding-bottom: 20px; 
+}
+
+.main-page-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("../../assets/images/bg/main_bg.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: blur(8px);
+  z-index: -1;
 }
 
 .inCorrectWord {
