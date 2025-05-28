@@ -9,7 +9,6 @@ Includes multiple difficulty levels, smart hints, post-round statistics, and bea
 ## 🔗 Links
 
 - 🌐 [Live Demo on Vercel](https://react-puzzle-rust.vercel.app/)
-- 💻 [Source Code (GitHub)](https://github.com/Marta109/rss-puzzle-react)
 
 ---
 
@@ -21,7 +20,6 @@ Includes multiple difficulty levels, smart hints, post-round statistics, and bea
   - 3 types of hints: translation, pronunciation, and image  
   - Sentence-building with drag-and-drop UI  
 - 🎨 **Artwork Puzzle Progression**  
-- 📱 **Fully responsive design** with modern UI/UX and subtle animations
 
 ---
 
