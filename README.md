@@ -62,7 +62,7 @@ After every round, players receive feedback on their performance:
 
 - **Frontend:** React, Vite  
 - **Deployment:** Vercel  
-- **Design:** Custom UI with CSS animations  
+- **Design:** Custom UI with CSS animations and Bootstrap 
 - **State Management:** React Hooks
 
 ---
